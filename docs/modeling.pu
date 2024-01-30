@@ -1,0 +1,63 @@
+@startuml
+	package DomainModel {
+		package ユーザー集約 {
+			object ユーザー {
+				ユーザーID
+				名前
+				メールアドレス
+				アイコン
+			}
+			object フォロワー {
+				ユーザーID
+				名前
+				アイコン
+			}
+		}
+
+		package 投稿集約 {
+			object 投稿 {
+				投稿ID
+				タイトル
+				説明
+				カロリー
+				難易度
+			}
+			object いいね {
+				ユーザーID
+			}
+			object プロセス {
+				説明
+				画像
+			}
+			object 材料 {
+				材料名
+				量
+			}
+		}
+	}
+
+	note left of いいね
+		* １投稿にユーザーIDが同様のいいねは二つ以上存在しない
+	end note
+
+	note left of 投稿
+		* 難易度は1~5段階
+		* 説明は200文字以内
+		* タイトルは40文字以内
+	end note
+
+	note bottom of フォロワー
+		* 1ユーザーにユーザーがIDが同様のフォロワーは二人以上存在しない
+	end note
+
+	note right of ユーザー
+		* 名前は20文字以内
+		* アイコンはなくても良い
+	end note
+
+	ユーザー "1" --> "0..n" フォロワー
+	ユーザー "1" --> "0..n" 投稿
+	投稿 "1" --> "0..n" いいね
+	投稿 "1" --> "1..n" 材料
+	投稿 "1" --> "1..n" プロセス
+@enduml
