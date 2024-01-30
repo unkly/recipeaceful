@@ -13,10 +13,13 @@
       "cache": false,
       "persistent": true
     },
-    "db:generate": {
+    "generate": {
       "cache": false
     },
-    "db:push": {
+    "push": {
+      "cache": false
+    },
+    "studio": {
       "cache": false
     }
   }
