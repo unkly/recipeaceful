@@ -4,7 +4,8 @@
   "scripts": {
     "generate": "prisma generate",
     "push": "prisma db push --skip-generate",
-    "studio": "prisma studio"
+    "studio": "prisma studio",
+    "migrate": "prisma migrate dev"
   },
   "dependencies": {
     "@prisma/client": "latest"
