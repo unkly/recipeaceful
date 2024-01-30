@@ -16,7 +16,7 @@ model User {
   createdBy String
   updatedAt DateTime?
   updatedBy String?
-  revokedAt DateTime 
+  revokedAt DateTime?
   revokedBy String?
   postHearts Post_Heart[]
 }

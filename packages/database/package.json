@@ -2,8 +2,10 @@
   "name": "database",
   "version": "0.0.0",
   "scripts": {
-    "db:generate": "prisma generate",
-    "db:push": "prisma db push --skip-generate"
+    "generate": "prisma generate",
+    "push": "prisma db push --skip-generate",
+    "studio": "prisma studio",
+    "migrate": "prisma migrate dev"
   },
   "dependencies": {
     "@prisma/client": "latest"
