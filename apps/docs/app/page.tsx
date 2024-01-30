@@ -1,17 +1,17 @@
-import Image from "next/image";
-import { Card } from "@repo/ui/card";
-import { Code } from "@repo/ui/code";
-import styles from "./page.module.css";
-import { Button } from "@repo/ui/button";
+import Image from 'next/image'
+import { Card } from '@repo/ui/card'
+import { Code } from '@repo/ui/code'
+import styles from './page.module.css'
+import { Button } from '@repo/ui/button'
 
 function Gradient({
   conic,
   className,
-  small,
+  small
 }: {
-  small?: boolean;
-  conic?: boolean;
-  className?: string;
+  small?: boolean
+  conic?: boolean
+  className?: string
 }): JSX.Element {
   return (
     <span
@@ -19,37 +19,37 @@ function Gradient({
         styles.gradient,
         conic ? styles.glowConic : undefined,
         small ? styles.gradientSmall : styles.gradientLarge,
-        className,
+        className
       ]
         .filter(Boolean)
-        .join(" ")}
+        .join(' ')}
     />
-  );
+  )
 }
 
 const LINKS = [
   {
-    title: "Docs",
-    href: "https://turbo.build/repo/docs",
-    description: "Find in-depth information about Turborepo features and API.",
+    title: 'Docs',
+    href: 'https://turbo.build/repo/docs',
+    description: 'Find in-depth information about Turborepo features and API.'
   },
   {
-    title: "Learn",
-    href: "https://turbo.build/repo/docs/handbook",
-    description: "Learn more about monorepos with our handbook.",
+    title: 'Learn',
+    href: 'https://turbo.build/repo/docs/handbook',
+    description: 'Learn more about monorepos with our handbook.'
   },
   {
-    title: "Templates",
-    href: "https://turbo.build/repo/docs/getting-started/from-example",
-    description: "Choose from over 15 examples and deploy with a single click.",
+    title: 'Templates',
+    href: 'https://turbo.build/repo/docs/getting-started/from-example',
+    description: 'Choose from over 15 examples and deploy with a single click.'
   },
   {
-    title: "Deploy",
-    href: "https://vercel.com/new",
+    title: 'Deploy',
+    href: 'https://vercel.com/new',
     description:
-      "Instantly deploy your Turborepo to a shareable URL with Vercel.",
-  },
-];
+      'Instantly deploy your Turborepo to a shareable URL with Vercel.'
+  }
+]
 
 export default function Page(): JSX.Element {
   return (
@@ -63,9 +63,8 @@ export default function Page(): JSX.Element {
           <a
             href="https://vercel.com?utm_source=create-turbo&utm_medium=basic&utm_campaign=create-turbo"
             rel="noopener noreferrer"
-            target="_blank"
-          >
-            By{" "}
+            target="_blank">
+            By{' '}
             <Image
               alt="Vercel Logo"
               className={styles.vercelLogo}
@@ -78,7 +77,9 @@ export default function Page(): JSX.Element {
         </div>
       </div>
 
-      <Button appName="docs" className={styles.button}>
+      <Button
+        appName="docs"
+        className={styles.button}>
         Click me!
       </Button>
 
@@ -91,11 +92,15 @@ export default function Page(): JSX.Element {
                 height={614}
                 src="circles.svg"
                 width={614}
-                style={{ pointerEvents: "none" }}
+                style={{ pointerEvents: 'none' }}
               />
             </div>
             <div className={styles.logoGradientContainer}>
-              <Gradient className={styles.logoGradient} conic small />
+              <Gradient
+                className={styles.logoGradient}
+                conic
+                small
+              />
             </div>
 
             <div className={styles.logo}>
@@ -105,18 +110,20 @@ export default function Page(): JSX.Element {
                 priority
                 src="turborepo.svg"
                 width={120}
-                style={{ pointerEvents: "none" }}
+                style={{ pointerEvents: 'none' }}
               />
             </div>
           </div>
-          <Gradient className={styles.backgroundGradient} conic />
+          <Gradient
+            className={styles.backgroundGradient}
+            conic
+          />
           <div className={styles.turborepoWordmarkContainer}>
             <svg
               className={styles.turborepoWordmark}
               viewBox="0 0 506 50"
               width={200}
-              xmlns="http://www.w3.org/2000/svg"
-            >
+              xmlns="http://www.w3.org/2000/svg">
               <title>Turborepo logo</title>
               <path d="M53.7187 12.0038V1.05332H0.945312V12.0038H20.8673V48.4175H33.7968V12.0038H53.7187Z" />
               <path d="M83.5362 49.1431C99.764 49.1431 108.67 40.8972 108.67 27.3081V1.05332H95.7401V26.0547C95.7401 33.6409 91.7821 37.9287 83.5362 37.9287C75.2904 37.9287 71.3324 33.6409 71.3324 26.0547V1.05332H58.4029V27.3081C58.4029 40.8972 67.3084 49.1431 83.5362 49.1431Z" />
@@ -134,11 +141,15 @@ export default function Page(): JSX.Element {
 
       <div className={styles.grid}>
         {LINKS.map(({ title, href, description }) => (
-          <Card className={styles.card} href={href} key={title} title={title}>
+          <Card
+            className={styles.card}
+            href={href}
+            key={title}
+            title={title}>
             {description}
           </Card>
         ))}
       </div>
     </main>
-  );
+  )
 }
