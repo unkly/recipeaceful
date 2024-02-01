@@ -1,4 +1,4 @@
-import { Regex } from '@recipeaceful/library/dist/Regex'
+import { Regex } from '@recipeaceful/library/dist/const/Regex'
 import { PrimitiveValueObject } from '../seed'
 
 /**
