@@ -5,9 +5,14 @@
   "scripts": {
     "dev": "ts-node src/index.ts",
     "lint": "eslint . --max-warnings 0",
-    "codegen": "graphql-codegen --config codegen.ts"
+    "codegen": "graphql-codegen --config codegen.ts",
+    "lint:fix": "eslint --fix **/*.{ts,d.ts,js,cjs,mjs}"
   },
   "devDependencies": {
+    "@recipeaceful/library": "^1.0.0",
+    "@recipeaceful/usecase": "^1.0.0",
+    "@recipeaceful/domain": "^1.0.0",
+    "@recipeaceful/infrastructure": "^1.0.0",
     "@graphql-codegen/cli": "5.0.0",
     "@graphql-codegen/introspection": "4.0.0",
     "@graphql-codegen/typed-document-node": "^5.0.1",

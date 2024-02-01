@@ -8,5 +8,6 @@ module.exports = {
   htmlWhitespaceSensitivity: 'ignore',
   bracketSameLine: true,
   singleAttributePerLine: true,
-  endOfLine: 'lf'
+  endOfLine: 'lf',
+  printWidth: 120
 }

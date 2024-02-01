@@ -24,7 +24,8 @@ module.exports = {
     // Ignore dotfiles
     '.*.js',
     'node_modules/',
-    'dist/'
+    'dist/',
+    'tsconfig.json'
   ],
   overrides: [
     {

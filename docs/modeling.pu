@@ -38,6 +38,7 @@
 
 	note left of いいね
 		* １投稿にユーザーIDが同様のいいねは二つ以上存在しない
+		* 自分の投稿にはいいねできない
 	end note
 
 	note left of 投稿
@@ -48,6 +49,7 @@
 
 	note bottom of フォロワー
 		* 1ユーザーにユーザーがIDが同様のフォロワーは二人以上存在しない
+		* 自分を自分がフォローはできない
 	end note
 
 	note right of ユーザー

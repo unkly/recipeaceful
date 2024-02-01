@@ -1,4 +1,4 @@
-name: web
+name: infrastructure
 on: [push]
 jobs:
   check-bats-version:
@@ -12,4 +12,4 @@ jobs:
       - run: pnpm install
       - run: pnpm add -w -D turbo
       - run: pnpm build
-      - run: pnpm --filter web run lint
+      - run: pnpm --filter infrastructure run lint
