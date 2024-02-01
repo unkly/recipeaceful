@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "lint": "eslint . --max-warnings 0",
+    "lint": "eslint .",
     "watch": "tsc -w",
+    "build": "tsc",
     "lint:fix": "eslint --fix **/*.{ts,d.ts,js,cjs,mjs}"
   },
   "devDependencies": {

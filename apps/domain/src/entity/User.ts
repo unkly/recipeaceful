@@ -16,7 +16,7 @@ type Props = {
  * ユーザー
  */
 export class User extends Entity {
-  private constructor(private readonly _props: Props) {
+  private constructor(readonly _props: Props) {
     super()
   }
 

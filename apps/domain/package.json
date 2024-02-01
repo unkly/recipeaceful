@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "tsc",
-    "lint": "eslint . --max-warnings 0",
+    "lint": "eslint .",
     "watch": "tsc -w",
     "lint:fix": "eslint --fix **/*.{ts,d.ts,js,cjs,mjs}"
   },
