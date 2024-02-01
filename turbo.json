@@ -24,6 +24,12 @@
     },
     "migrate": {
       "cache": false
+    },
+    "watch": {
+      "cache": false
+    },
+    "lint:fix": {
+      "cache": false
     }
   }
 }
