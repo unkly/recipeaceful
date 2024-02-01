@@ -9,7 +9,7 @@ jobs:
         with:
           node-version: v19.1.0
       - run: npm install -g pnpm
-      - run: pnpm add -w -g turbo
+      - run: pnpm add -g turbo
       - run: pnpm install
       - run: turbo build
       - run: pnpm --filter infrastructure run lint
