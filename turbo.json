@@ -21,6 +21,9 @@
     },
     "studio": {
       "cache": false
+    },
+    "migrate": {
+      "cache": false
     }
   }
 }
