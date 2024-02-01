@@ -10,5 +10,6 @@ jobs:
           node-version: v19.1.0
       - run: npm install -g pnpm
       - run: pnpm add -w -D turbo
+      - run: pnpm install
       - run: pnpm build
       - run: pnpm --filter web run lint
