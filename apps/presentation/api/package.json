@@ -9,10 +9,10 @@
     "lint:fix": "eslint --fix **/*.{ts,d.ts,js,cjs,mjs}"
   },
   "devDependencies": {
-    "@recipeaceful/library": "*",
-    "@recipeaceful/usecase": "*",
-    "@recipeaceful/domain": "*",
-    "@recipeaceful/infrastructure": "*",
+    "@recipeaceful/library": "^1.0.0",
+    "@recipeaceful/usecase": "^1.0.0",
+    "@recipeaceful/domain": "^1.0.0",
+    "@recipeaceful/infrastructure": "^1.0.0",
     "@graphql-codegen/cli": "5.0.0",
     "@graphql-codegen/introspection": "4.0.0",
     "@graphql-codegen/typed-document-node": "^5.0.1",
