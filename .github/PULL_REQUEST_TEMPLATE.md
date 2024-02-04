@@ -1,6 +1,6 @@
 ### リンク
 
-[チケット](https://trello.com/c/46Q5fSQS/){:target="\_blank"}
+[チケット](https://trello.com/c/46Q5fSQS/)
 
 ### やったこと
 

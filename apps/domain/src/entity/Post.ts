@@ -41,6 +41,12 @@ export class Post extends Entity {
   }
 
   public static validate(props: Props) {
+    // プロセスは一つ以上存在する
+    if (props.processes.length === 0) throw new Error(`プロセスが設定されていません postId: ${props.postId.get()}`)
+
+    // 材料は１種類以上存在する
+    if (props.materials.length === 0) throw new Error(`材料が指定されていません postId: ${props.postId.get()}`)
+
     if (props.likes?.length) {
       // 自分の投稿にはいいね出来ない
       if (props.likes.find((like) => like.userId.get() === props.user.userId.get()))
