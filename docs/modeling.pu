@@ -2,36 +2,36 @@
 	package DomainModel {
 		package ユーザー集約 {
 			object ユーザー {
-				ユーザーID
-				名前
-				メールアドレス
-				アイコン
+				ユーザーID : userId
+				名前 : userName
+				メールアドレス : mailAddress
+				アイコン : userIcon
 			}
 			object フォロワー {
-				ユーザーID
-				名前
-				アイコン
+				ユーザーID : userId
+				名前 : userName
+				アイコン : userIcon
 			}
 		}
 
 		package 投稿集約 {
 			object 投稿 {
-				投稿ID
-				タイトル
-				説明
-				カロリー
-				難易度
+				投稿ID : postId
+				タイトル : postTitle
+				説明 : postDetail
+				カロリー : calories
+				難易度 : difficulty
 			}
 			object いいね {
-				ユーザーID
+				ユーザーID : userId
 			}
 			object プロセス {
-				説明
-				画像
+				説明 : processDetail
+				画像 : processImage
 			}
 			object 材料 {
-				材料名
-				量
+				材料名 : materialName
+				量 : count
 			}
 		}
 	}
@@ -45,6 +45,7 @@
 		* 難易度は1~5段階
 		* 説明は200文字以内
 		* タイトルは40文字以内
+		* 自分の投稿は編集・削除が出来る
 	end note
 
 	note bottom of フォロワー
@@ -55,6 +56,16 @@
 	note right of ユーザー
 		* 名前は20文字以内
 		* アイコンはなくても良い
+		* メールアドレスは重複不可
+	end note
+
+	note bottom of プロセス
+		* プロセスは必ず一つ以上存在する
+		* 画像はなくてもよい
+	end note
+
+	note bottom of 材料
+		* 材料は必ず一つ以上存在する
 	end note
 
 	ユーザー "1" --> "0..n" フォロワー
