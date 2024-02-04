@@ -8,7 +8,7 @@ generator client {
 }
 
 model User {
-  uuid String @id @default(uuid()) @db.Uuid
+  userId String @id @default(uuid()) @db.Uuid
   email String @unique
   name String
   icon String?
@@ -16,33 +16,53 @@ model User {
   createdBy String
   updatedAt DateTime?
   updatedBy String?
-  revokedAt DateTime?
-  revokedBy String?
-  postHearts Post_Heart[]
+  likes Post_Like[]
+  follower Follower[]
+}
+
+model Follower {
+  userId String @id @default(uuid()) @db.Uuid
+  user User @relation(fields: [userId], references: [userId])
+  createdAt DateTime @default(now())
+  createdBy String
+  updatedAt DateTime?
+  updatedBy String?
 }
 
 model Post {
-  uuid String @id @default(uuid()) @db.Uuid
+  postId String @id @default(uuid()) @db.Uuid
   title String
   detail String
-  calorie Int?
-  difficulty Int?
+  calorie Int
+  difficulty Int
   materials Post_Material[]
   process Process[]
-  hearts Post_Heart[]
+  hearts Post_Like[]
+  createdAt DateTime @default(now())
+  createdBy String
+  updatedAt DateTime?
+  updatedBy String?
 }
 
 model Post_Material {
-  uuid String @id @default(uuid()) @db.Uuid
+  postMaterialId String @id @default(uuid()) @db.Uuid
   postId String @db.Uuid
-  post Post @relation(fields: [postId], references: [uuid])
+  post Post @relation(fields: [postId], references: [postId])
   materialId String @db.Uuid
   quantity Int
+  createdAt DateTime @default(now())
+  createdBy String
+  updatedAt DateTime?
+  updatedBy String?
 }
 
 model Material {
-  uuid String @id @default(uuid()) @db.Uuid
+  materialId String @id @default(uuid()) @db.Uuid
   name String
+  createdAt DateTime @default(now())
+  createdBy String
+  updatedAt DateTime?
+  updatedBy String?
 }
 
 model Process {
@@ -50,13 +70,21 @@ model Process {
   text String
   image String?
   postId String @db.Uuid
-  post Post @relation(fields: [postId], references: [uuid])
+  post Post @relation(fields: [postId], references: [postId])
+  createdAt DateTime @default(now())
+  createdBy String
+  updatedAt DateTime?
+  updatedBy String?
 }
 
-model Post_Heart {
-  uuid String @id @default(uuid()) @db.Uuid
+model Post_Like {
+  postLikeId String @id @default(uuid()) @db.Uuid
   userId String @db.Uuid
-  user User @relation(fields: [userId], references: [uuid])
+  user User @relation(fields: [userId], references: [userId])
   postId String @db.Uuid
-  post Post @relation(fields: [postId], references: [uuid])
+  post Post @relation(fields: [postId], references: [postId])
+  createdAt DateTime @default(now())
+  createdBy String
+  updatedAt DateTime?
+  updatedBy String?
 }
