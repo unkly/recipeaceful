@@ -1,2 +1,4 @@
-- 'apps/**/*'
-- 'packages/**/*'
+packages:
+  - 'apps/**/*'
+  - 'packages/**/*'
+packageManager: pnpm
