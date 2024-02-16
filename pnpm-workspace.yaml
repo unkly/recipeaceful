@@ -1,4 +1,9 @@
 packages:
-  - 'apps/**/*'
+  - 'apps/domain/*'
+  - 'apps/infrastructure/*'
+  - 'apps/library/*'
+  - 'apps/presentation/api/'
+  - 'apps/presentation/web/'
+  - 'apps/usecase/*'
   - 'packages/**/*'
 packageManager: pnpm
