@@ -1,5 +1,5 @@
 packages:
-  - 'apps/**/*'
-  - 'packages/**/*'
-  - '!apps/presentation/web/.next'
+  - 'apps/*/*'
+  - 'apps/*'
+  - 'packages/*/*'
 packageManager: pnpm
