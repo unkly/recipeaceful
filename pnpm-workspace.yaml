@@ -1,9 +1,5 @@
 packages:
-  - 'apps/domain/'
-  - 'apps/infrastructure/'
-  - 'apps/library/'
-  - 'apps/presentation/api/'
-  - 'apps/presentation/web/'
-  - 'apps/usecase/'
+  - 'apps/**/*'
   - 'packages/**/*'
+  - '!apps/presentation/web/.next'
 packageManager: pnpm
