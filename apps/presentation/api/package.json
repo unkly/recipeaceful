@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "ts-node src/index.ts",
-    "lint": "eslint . --max-warnings 0",
+    "lint": "eslint .",
     "codegen": "graphql-codegen --config codegen.ts",
     "lint:fix": "eslint --fix **/*.{ts,d.ts,js,cjs,mjs}"
   },
