@@ -1,4 +1,11 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
-  transpilePackages: ['@repo/ui']
+  reactStrictMode: true,
+  compiler: {
+    emotion: true
+  },
+  transpilePackages: ['@repo/ui'],
+  experimental: {
+    forceSwcTransforms: true
+  }
 }

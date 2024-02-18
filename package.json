@@ -2,17 +2,13 @@
   "name": "ddd",
   "version": "1.0.0",
   "private": true,
-  "directories": {
-    "doc": "docs"
-  },
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
-  "keywords": [],
-  "author": "unkly <u7gyuuu7gi@gmail.com>",
+  "author": "",
   "devDependencies": {
     "@prisma/client": "^5.8.0",
     "@react-native/eslint-config": "^0.73.2",
