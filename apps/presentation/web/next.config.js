@@ -4,7 +4,6 @@ module.exports = {
   compiler: {
     emotion: true
   },
-  transpilePackages: ['@repo/ui'],
   experimental: {
     forceSwcTransforms: true
   }
