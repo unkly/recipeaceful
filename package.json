@@ -1,5 +1,5 @@
 {
-  "name": "ddd",
+  "name": "recipeaceful",
   "version": "1.0.0",
   "private": true,
   "directories": {
@@ -11,8 +11,6 @@
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
-  "keywords": [],
-  "author": "unkly <u7gyuuu7gi@gmail.com>",
   "devDependencies": {
     "@prisma/client": "^5.8.0",
     "@react-native/eslint-config": "^0.73.2",
