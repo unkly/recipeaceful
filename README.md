@@ -10,6 +10,10 @@ packageManager: turborepo pnpm
 infra: aws
 ddd  
 
+インフラアーキテクチャ
+
+![architecture](https://github.com/unkly/recipeaceful/assets/105118423/46f0226e-67a7-42a8-bb2d-7dd26543f9cc)
+
 ## セットアップ
 1. `git clone https://github.com/unkly/recipeaceful.git`
 2. `npm install -g pnpm && pnpm install && pnpm add -w -D turbo && pnpm build`
