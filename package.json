@@ -16,13 +16,13 @@
   "devDependencies": {
     "@prisma/client": "^5.8.0",
     "@react-native/eslint-config": "^0.73.2",
-    "@types/node": "^20.10.8",
-    "eslint": "^8.56.0",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "@types/node": "^20.10.8",
+    "eslint": "^8.56.0",
     "prettier": "^3.1.1",
-    "turbo": "latest",
     "ts-node": "^10.9.2",
+    "turbo": "^1.11.3",
     "typescript": "^5.3.3"
   },
   "packageManager": "pnpm@8.15.1",
