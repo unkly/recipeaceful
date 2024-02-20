@@ -8,6 +8,7 @@ type Props = {
   userId: Uuid
   name: UserName
   mailAddress: MailAddress
+  password: string
   icon: string | null
   followers: User[] | null
 }

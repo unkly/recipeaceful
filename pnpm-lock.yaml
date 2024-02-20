@@ -255,7 +255,7 @@ importers:
   apps/usecase:
     devDependencies:
       '@recipeaceful/domain':
-        specifier: '*'
+        specifier: ^1.0.0
         version: link:../domain
       '@recipeaceful/library':
         specifier: ^1.0.0

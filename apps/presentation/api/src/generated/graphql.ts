@@ -6,6 +6,7 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: 
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string; }
@@ -22,7 +23,7 @@ export type Mutation = {
 
 
 export type MutationRegisterUserArgs = {
-  input?: InputMaybe<RegisterUserInput>;
+  input: RegisterUserInput;
 };
 
 export type Query = {
@@ -140,7 +141,7 @@ export type ResolversParentTypes = {
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  registerUser?: Resolver<ResolversTypes['ReturnResultPayload'], ParentType, ContextType, Partial<MutationRegisterUserArgs>>;
+  registerUser?: Resolver<ResolversTypes['ReturnResultPayload'], ParentType, ContextType, RequireFields<MutationRegisterUserArgs, 'input'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
@@ -168,4 +169,4 @@ export type Resolvers<ContextType = any> = {
 
 
 
-  export const typeDefs = `schema{query:Query mutation:Mutation}type Mutation{registerUser(input:RegisterUserInput):ReturnResultPayload!}type Query{users:[User!]}input RegisterUserInput{email:String!name:String!password:String!}type ReturnResultPayload{result:Boolean!}type User{email:String!id:String!name:String!}`;
+  export const typeDefs = `schema{query:Query mutation:Mutation}type Mutation{registerUser(input:RegisterUserInput!):ReturnResultPayload!}type Query{users:[User!]}input RegisterUserInput{email:String!name:String!password:String!}type ReturnResultPayload{result:Boolean!}type User{email:String!id:String!name:String!}`;

@@ -1,5 +1,5 @@
 import { PrimitiveValueObject } from '../seed'
-import { Difficulty as CDifficulty } from '@recipeaceful/library/dist/const'
+import { DIFFICULTY } from '@recipeaceful/library/dist/const'
 
 /**
  * 難易度
@@ -15,7 +15,7 @@ export class Difficulty extends PrimitiveValueObject<number> {
   }
 
   static valid(prop: number) {
-    if (!Object.keys(CDifficulty).find((difficulty) => Number(difficulty) === prop))
+    if (!Object.keys(DIFFICULTY).find((difficulty) => Number(difficulty) === prop))
       throw new Error(`invalid difficulty: ${prop}`)
   }
 }

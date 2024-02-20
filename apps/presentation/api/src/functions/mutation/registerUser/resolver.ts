@@ -1,6 +1,6 @@
 import { MutationRegisterUserArgs, ReturnResultPayload } from '../../../generated/graphql'
 import { Context } from '../../../type'
-import { authenticate } from '../../../utils/authenticate'
+import { authenticate, hash } from '../../../utils/authenticate'
 
 export const registerUser = async (
   parent: unknown,
@@ -9,6 +9,7 @@ export const registerUser = async (
 ): Promise<ReturnResultPayload> => {
   authenticate(context.request.headers.get('authorization'))
 
+  console.log(hash(args.input.password))
   return {
     result: false
   }

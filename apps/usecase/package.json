@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@recipeaceful/library": "^1.0.0",
-    "@recipeaceful/domain": "*",
+    "@recipeaceful/domain": "^1.0.0",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/eslint": "^8.56.1",
