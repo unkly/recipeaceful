@@ -7,3 +7,17 @@ type User {
 type Query {
   users: [User!]
 }
+
+input RegisterUserInput {
+  email: String!
+  password: String!
+  name: String!
+}
+
+type ReturnResultPayload {
+  result: Boolean!
+}
+
+type Mutation {
+  registerUser(input: RegisterUserInput): ReturnResultPayload!
+}

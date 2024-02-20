@@ -15,9 +15,30 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  registerUser: ReturnResultPayload;
+};
+
+
+export type MutationRegisterUserArgs = {
+  input?: InputMaybe<RegisterUserInput>;
+};
+
 export type Query = {
   __typename?: 'Query';
   users?: Maybe<Array<User>>;
+};
+
+export type RegisterUserInput = {
+  email: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+};
+
+export type ReturnResultPayload = {
+  __typename?: 'ReturnResultPayload';
+  result: Scalars['Boolean']['output'];
 };
 
 export type User = {
@@ -99,7 +120,10 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
+  RegisterUserInput: RegisterUserInput;
+  ReturnResultPayload: ResolverTypeWrapper<ReturnResultPayload>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
   User: ResolverTypeWrapper<User>;
 };
@@ -107,13 +131,25 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean']['output'];
+  Mutation: {};
   Query: {};
+  RegisterUserInput: RegisterUserInput;
+  ReturnResultPayload: ReturnResultPayload;
   String: Scalars['String']['output'];
   User: User;
 };
 
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  registerUser?: Resolver<ResolversTypes['ReturnResultPayload'], ParentType, ContextType, Partial<MutationRegisterUserArgs>>;
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   users?: Resolver<Maybe<Array<ResolversTypes['User']>>, ParentType, ContextType>;
+};
+
+export type ReturnResultPayloadResolvers<ContextType = any, ParentType extends ResolversParentTypes['ReturnResultPayload'] = ResolversParentTypes['ReturnResultPayload']> = {
+  result?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
@@ -124,10 +160,12 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
 };
 
 export type Resolvers<ContextType = any> = {
+  Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  ReturnResultPayload?: ReturnResultPayloadResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 };
 
 
 
-  export const typeDefs = `schema{query:Query}type Query{users:[User!]}type User{email:String!id:String!name:String!}`;
+  export const typeDefs = `schema{query:Query mutation:Mutation}type Mutation{registerUser(input:RegisterUserInput):ReturnResultPayload!}type Query{users:[User!]}input RegisterUserInput{email:String!name:String!password:String!}type ReturnResultPayload{result:Boolean!}type User{email:String!id:String!name:String!}`;

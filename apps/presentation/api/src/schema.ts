@@ -1,7 +1,7 @@
 import { makeExecutableSchema } from '@graphql-tools/schema'
 import { User, typeDefs } from './generated/graphql'
 import { PrismaClient } from '@prisma/client'
-import { GraphQLContext } from './context'
+import { registerUser } from './functions/mutation/registerUser/resolver'
 
 const resolvers = {
   Query: {
@@ -10,12 +10,15 @@ const resolvers = {
       const users = await prisma.user.findMany()
       return users.map((user) => {
         return {
-          id: user.uuid,
+          id: user.userId,
           email: user.email,
           name: user.name
         }
       })
     }
+  },
+  Mutation: {
+    registerUser: registerUser
   }
 }
 
