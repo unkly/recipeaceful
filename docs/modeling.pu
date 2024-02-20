@@ -34,7 +34,28 @@
 				量 : count
 			}
 		}
+
+		package 通知集約 {
+			object SMS {
+				送信ID
+				通知区分
+				コンテンツ
+				ステータス
+			}
+
+			object メール {
+				送信ID
+				通知区分
+				コンテンツ
+				ステータス
+			}
+		}
 	}
+	
+	note left of 通知集約
+		* 通知区分は現状ユーザー登録のみ
+		* ステータスは「送信中(pending)・送信済み(succeeded)・送信失敗(failed)」
+	end note
 
 	note left of いいね
 		* １投稿にユーザーIDが同様のいいねは二つ以上存在しない
