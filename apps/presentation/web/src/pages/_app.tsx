@@ -1,6 +1,8 @@
 import { SessionProvider } from 'next-auth/react'
 import { AppProps } from 'next/app'
 import Head from 'next/head'
+import { Layout } from '../components/shared/Layout'
+import '../components/shared/global.css'
 
 const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => (
   <>
@@ -12,7 +14,9 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => (
       />
     </Head>
     <SessionProvider session={session}>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </SessionProvider>
   </>
 )
