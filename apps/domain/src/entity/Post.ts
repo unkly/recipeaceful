@@ -24,7 +24,7 @@ type Props = {
     detail: ProcessDetail
     image: string | null
   }[]
-  user: User
+  userId: Ulid
   likes: User[] | null
 }
 
