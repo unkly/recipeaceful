@@ -1,23 +1,29 @@
+import { UserStatus } from '../value_object/UserStatus'
 import { Entity } from '../seed'
 import { MailAddress } from '../value_object/MailAddress'
 import { UserName } from '../value_object/UserName'
-import { Uuid } from '../value_object/Uuid'
 import { ArrayUtil } from '@recipeaceful/library/dist/utils/array'
+import { Post } from './Post'
+import { USER_STATUS_KEY } from '@recipeaceful/library/dist/const'
+import { Ulid } from 'value_object/Ulid'
 
 type Props = {
-  userId: Uuid
+  userId: Ulid
   name: UserName
-  mailAddress: MailAddress
+  email: MailAddress
   password: string
   icon: string | null
+  status: UserStatus
+  follows: User[] | null
   followers: User[] | null
+  posts: Post[] | null
 }
 
 /**
  * ユーザー
  */
 export class User extends Entity {
-  private constructor(readonly _props: Props) {
+  private constructor(private readonly _props: Props) {
     super()
   }
 
@@ -37,21 +43,44 @@ export class User extends Entity {
         throw new Error(`同一ユーザーに２回以上フォローされています userId: ${props.userId.get()}`)
       }
     }
+
+    // ユーザーが仮登録中の場合投稿・いいね・フォローはできない
+    if (props.status.get() !== USER_STATUS_KEY.ACTIVE) {
+      if (props.follows?.length) throw new Error(`仮登録中はユーザーをフォローできません`)
+
+      if (props.posts?.length) throw new Error(`仮登録中は投稿にいいねできません`)
+    }
   }
 
   get name() {
     return this._props.name
   }
 
-  get mailAddress() {
-    return this._props.mailAddress
+  get email() {
+    return this._props.email
   }
 
   get icon() {
     return this._props.icon
   }
 
+  get status() {
+    return this._props.status
+  }
+
   get userId() {
     return this._props.userId
+  }
+
+  get follows() {
+    return this._props.follows
+  }
+
+  get followers() {
+    return this._props.followers
+  }
+
+  get posts() {
+    return this._props.posts
   }
 }

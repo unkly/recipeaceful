@@ -1,29 +1,27 @@
 import { Entity } from 'seed'
 import { ActionDivision } from 'value_object/ActionDivision'
-import { NotificationStatus } from 'value_object/NotificationStatus'
 import { Ulid } from 'value_object/Ulid'
 
 type Props = {
-  notificationId: Ulid
+  templateId: Ulid
   actionDivision: ActionDivision
   content: string
-  status: NotificationStatus
 }
 
-export class Sms extends Entity {
+export class EmailTemplate extends Entity {
   private constructor(private readonly _props: Props) {
     super()
   }
 
   public static create(props: Props) {
     this.validate(props)
-    return new Sms(props)
+    return new EmailTemplate(props)
   }
 
   public static validate(props: Props) {}
 
-  get notificationId() {
-    return this._props.notificationId
+  get templateId() {
+    return this._props.templateId
   }
 
   get actionDivision() {
@@ -32,9 +30,5 @@ export class Sms extends Entity {
 
   get content() {
     return this._props.content
-  }
-
-  get status() {
-    return this._props.status
   }
 }

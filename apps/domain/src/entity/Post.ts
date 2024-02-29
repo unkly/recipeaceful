@@ -6,11 +6,12 @@ import { Material } from '../value_object/Material'
 import { PostDetail } from '../value_object/PostDetail'
 import { PostTitle } from '../value_object/PostTitle'
 import { ProcessDetail } from '../value_object/ProcessDetail'
-import { Uuid } from '../value_object/Uuid'
 import { User } from './User'
+import { USER_STATUS_KEY } from '@recipeaceful/library/dist/const'
+import { Ulid } from 'value_object/Ulid'
 
 type Props = {
-  postId: Uuid
+  postId: Ulid
   title: PostTitle
   detail: PostDetail
   calories: Calories
@@ -56,6 +57,10 @@ export class Post extends Entity {
       if (props.likes.length !== ArrayUtil.objectUnique(props.likes, 'userId').length)
         throw new Error(`同一ユーザーに２回以上いいねされています userId: ${props.user.userId.get()}
       `)
+    }
+
+    if (props.user.status.get() !== USER_STATUS_KEY.ACTIVE) {
+      throw new Error(`登録済みのユーザー以外は投稿はできません`)
     }
   }
 

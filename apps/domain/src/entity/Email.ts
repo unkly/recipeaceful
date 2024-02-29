@@ -1,13 +1,14 @@
 import { Entity } from 'seed'
-import { ActionDivision } from 'value_object/ActionDivision'
 import { NotificationStatus } from 'value_object/NotificationStatus'
-import { Uuid } from 'value_object/Uuid'
+import { EmailTemplate } from './EmailTemplate'
+import { MailAddress } from 'value_object/MailAddress'
+import { Ulid } from 'value_object/Ulid'
 
 type Props = {
-  notificationId: Uuid
-  actionDivision: ActionDivision
-  content: string
+  notificationId: Ulid
+  template: EmailTemplate
   status: NotificationStatus
+  email: MailAddress
 }
 
 export class Email extends Entity {
@@ -22,19 +23,23 @@ export class Email extends Entity {
 
   public static validate(props: Props) {}
 
+  get template() {
+    return this._props.template
+  }
+
   get notificationId() {
     return this._props.notificationId
   }
 
-  get actionDivision() {
-    return this._props.actionDivision
-  }
-
-  get content() {
-    return this._props.content
-  }
-
   get status() {
     return this._props.status
+  }
+
+  get email() {
+    return this._props.email
+  }
+
+  updateStatus(status: NotificationStatus) {
+    this._props.status = status
   }
 }
