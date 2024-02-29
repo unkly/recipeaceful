@@ -1,4 +1,3 @@
-import { ArrayUtil } from '@recipeaceful/library/dist/utils/array'
 import { Entity } from '../seed'
 import { Calories } from '../valueObject/Calories'
 import { Difficulty } from '../valueObject/Difficulty'
@@ -6,7 +5,6 @@ import { Material } from '../valueObject/Material'
 import { PostDetail } from '../valueObject/PostDetail'
 import { PostTitle } from '../valueObject/PostTitle'
 import { ProcessDetail } from '../valueObject/ProcessDetail'
-import { User } from './User'
 import { USER_STATUS_KEY } from '@recipeaceful/library/dist/const'
 import { Ulid } from 'valueObject/Ulid'
 import { UserStatus } from 'valueObject/UserStatus'
@@ -27,7 +25,8 @@ type Props = {
   }[]
   userId: Ulid
   userStatus: UserStatus
-  likes: User[] | null
+  // userId
+  likes: Ulid[] | null
 }
 
 /**
@@ -52,11 +51,11 @@ export class Post extends Entity {
 
     if (props.likes?.length) {
       // 自分の投稿にはいいね出来ない
-      if (props.likes.find((like) => like.userId.get() === props.userId.get()))
+      if (props.likes.find((like) => like.get() === props.userId.get()))
         throw new Error(`自分の投稿にいいねは出来ません userId: ${props.userId.get()}`)
 
       // likesにuserIdが同じユーザーは二人以上存在しない
-      if (props.likes.length !== ArrayUtil.objectUnique(props.likes, 'userId').length)
+      if (props.likes.length !== new Set(props.likes).size)
         throw new Error(`同一ユーザーに２回以上いいねされています userId: ${props.userId.get()}
       `)
     }
