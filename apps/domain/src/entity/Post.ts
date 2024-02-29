@@ -9,6 +9,7 @@ import { ProcessDetail } from '../valueObject/ProcessDetail'
 import { User } from './User'
 import { USER_STATUS_KEY } from '@recipeaceful/library/dist/const'
 import { Ulid } from 'valueObject/Ulid'
+import { UserStatus } from 'valueObject/UserStatus'
 
 type Props = {
   postId: Ulid
@@ -25,6 +26,7 @@ type Props = {
     image: string | null
   }[]
   userId: Ulid
+  userStatus: UserStatus
   likes: User[] | null
 }
 
@@ -50,16 +52,16 @@ export class Post extends Entity {
 
     if (props.likes?.length) {
       // 自分の投稿にはいいね出来ない
-      if (props.likes.find((like) => like.userId.get() === props.user.userId.get()))
-        throw new Error(`自分の投稿にいいねは出来ません userId: ${props.user.userId.get()}`)
+      if (props.likes.find((like) => like.userId.get() === props.userId.get()))
+        throw new Error(`自分の投稿にいいねは出来ません userId: ${props.userId.get()}`)
 
       // likesにuserIdが同じユーザーは二人以上存在しない
       if (props.likes.length !== ArrayUtil.objectUnique(props.likes, 'userId').length)
-        throw new Error(`同一ユーザーに２回以上いいねされています userId: ${props.user.userId.get()}
+        throw new Error(`同一ユーザーに２回以上いいねされています userId: ${props.userId.get()}
       `)
     }
 
-    if (props.user.status.get() !== USER_STATUS_KEY.ACTIVE) {
+    if (props.userStatus.get() !== USER_STATUS_KEY.ACTIVE) {
       throw new Error(`登録済みのユーザー以外は投稿はできません`)
     }
   }
@@ -92,8 +94,12 @@ export class Post extends Entity {
     return this._props.processes
   }
 
-  get user() {
-    return this._props.user
+  get userId() {
+    return this._props.userId
+  }
+
+  get userStatus() {
+    return this._props.userStatus
   }
 
   get likes() {
