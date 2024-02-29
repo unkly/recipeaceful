@@ -1,8 +1,20 @@
 {
   "extends": "@repo/typescript-config/base.json",
   "compilerOptions": {
-    "plugins": []
+    "plugins": [],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "src/typescript-typedefs.js"]
+  "exclude": [
+    "node_modules",
+    "src/typescript-typedefs.js",
+    ".serverless/**/*",
+    ".webpack/**/*",
+    "_warmup/**/*",
+    ".vscode/**/*"
+  ],
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  }
 }

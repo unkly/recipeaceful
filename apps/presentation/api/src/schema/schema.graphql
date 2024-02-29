@@ -19,5 +19,5 @@ type ReturnResultPayload {
 }
 
 type Mutation {
-  registerUser(input: RegisterUserInput!): ReturnResultPayload!
+  registerUser(input: RegisterUserInput!): ReturnResultPayload
 }

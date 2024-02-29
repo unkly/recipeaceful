@@ -18,7 +18,7 @@ export type Scalars = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  registerUser: ReturnResultPayload;
+  registerUser?: Maybe<ReturnResultPayload>;
 };
 
 
@@ -141,7 +141,7 @@ export type ResolversParentTypes = {
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  registerUser?: Resolver<ResolversTypes['ReturnResultPayload'], ParentType, ContextType, RequireFields<MutationRegisterUserArgs, 'input'>>;
+  registerUser?: Resolver<Maybe<ResolversTypes['ReturnResultPayload']>, ParentType, ContextType, RequireFields<MutationRegisterUserArgs, 'input'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
@@ -167,6 +167,3 @@ export type Resolvers<ContextType = any> = {
   User?: UserResolvers<ContextType>;
 };
 
-
-
-  export const typeDefs = `schema{query:Query mutation:Mutation}type Mutation{registerUser(input:RegisterUserInput!):ReturnResultPayload!}type Query{users:[User!]}input RegisterUserInput{email:String!name:String!password:String!}type ReturnResultPayload{result:Boolean!}type User{email:String!id:String!name:String!}`;
