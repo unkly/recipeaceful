@@ -4,16 +4,18 @@ import { PrimitiveValueObject } from '../seed'
  * 説明
  */
 export class PostDetail extends PrimitiveValueObject<string> {
-  static create(prop: string) {
-    this.valid(prop)
-    return new PostDetail(prop)
+  public constructor(value: string) {
+    super(value)
+    this.valid(value)
+    return new PostDetail(value)
   }
+
   get(): string {
     return this._value
   }
 
-  static valid(prop: string) {
+  protected valid(value: string) {
     // 500文字以内
-    if (prop.length >= 500) throw new Error(`invalid postDetail: ${prop}`)
+    if (value.length >= 500) throw new Error(`invalid postDetail: ${value}`)
   }
 }

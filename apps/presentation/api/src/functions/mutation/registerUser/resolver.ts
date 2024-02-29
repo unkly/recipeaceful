@@ -44,12 +44,12 @@ export const registerUser = async (
   try {
     await useCase.register(
       User.create({
-        userId: Ulid.create(ulid()),
-        name: UserName.create(dto.name),
-        email: MailAddress.create(dto.email),
+        userId: new Ulid(ulid()),
+        name: new UserName(dto.name),
+        email: new MailAddress(dto.email),
         password: dto.password,
         icon: null,
-        status: UserStatus.create(USER_STATUS_KEY.PENDING),
+        status: new UserStatus(USER_STATUS_KEY.PENDING),
         follows: null,
         followers: null,
         posts: null

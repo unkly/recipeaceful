@@ -27,14 +27,14 @@ export class UpdateEmailNotificationRepository implements IUpdateEmailNotificati
     })
 
     return Email.create({
-      notificationId: Ulid.create(updatedEmail.mailNotificationId),
+      notificationId:new Ulid(updatedEmail.mailNotificationId),
       template: EmailTemplate.create({
-        templateId: Ulid.create(updatedEmail.mailTemplateId),
-        actionDivision: ActionDivision.create(updatedEmail.actionDivision),
+        templateId: new Ulid(updatedEmail.mailTemplateId),
+        actionDivision: new ActionDivision(updatedEmail.actionDivision),
         content: updatedEmail.content
       }),
-      status: NotificationStatus.create(updatedEmail.status),
-      email: MailAddress.create(updatedEmail.email)
+      status: new NotificationStatus(updatedEmail.status),
+      email: new MailAddress(updatedEmail.email)
     })
   }
 }

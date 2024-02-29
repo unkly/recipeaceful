@@ -5,16 +5,17 @@ import { PrimitiveValueObject } from '../seed'
  * メールアドレス
  */
 export class MailAddress extends PrimitiveValueObject<string> {
-  static create(prop: string) {
-    this.valid(prop)
-    return new MailAddress(prop)
+  public constructor(value: string) {
+    super(value)
+    this.valid(value)
+    return new MailAddress(value)
   }
 
   get(): string {
     return this._value
   }
 
-  static valid(prop: string) {
-    if (!prop.match(Regex.MAIL_ADDRESS)) throw new Error(`invalid mailAddress: ${prop}`)
+  protected valid(value: string) {
+    if (!value.match(Regex.MAIL_ADDRESS)) throw new Error(`invalid mailAddress: ${value}`)
   }
 }

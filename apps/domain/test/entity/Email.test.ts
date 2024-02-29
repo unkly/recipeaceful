@@ -9,16 +9,16 @@ import { MailAddress } from '../../src/valueObject/MailAddress'
 
 describe('Email', () => {
   it('正常系', () => {
-    const id = Ulid.create(ulid())
+    const id = new Ulid(ulid())
     const entity = Email.create({
       notificationId: id,
       template: EmailTemplate.create({
         templateId: id,
-        actionDivision: ActionDivision.create(ACTION_DIVISION_KEY.EMAIL_VARIFY),
+        actionDivision: new ActionDivision(ACTION_DIVISION_KEY.EMAIL_VARIFY),
         content: 'test'
       }),
-      status: NotificationStatus.create(NOTIFICATION_STATUS_KEY.SUCCEEDED),
-      email: MailAddress.create('test@example.com')
+      status: new NotificationStatus(NOTIFICATION_STATUS_KEY.SUCCEEDED),
+      email: new MailAddress('test@example.com')
     })
 
     expect(entity.notificationId.get()).toBe(id.get())
@@ -29,7 +29,7 @@ describe('Email', () => {
     expect(entity.email.get()).toBe('test@example.com')
 
     // updateStatus
-    entity.updateStatus(NotificationStatus.create(NOTIFICATION_STATUS_KEY.FAILED))
+    entity.updateStatus(new NotificationStatus(NOTIFICATION_STATUS_KEY.FAILED))
     expect(entity.status.get()).toBe(NOTIFICATION_STATUS_KEY.FAILED)
   })
 })

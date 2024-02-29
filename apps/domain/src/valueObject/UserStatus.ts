@@ -5,16 +5,17 @@ import { PrimitiveValueObject } from '../seed'
  * ユーザー認証ステータス
  */
 export class UserStatus extends PrimitiveValueObject<number> {
-  static create(prop: number) {
-    this.valid(prop)
-    return new UserStatus(prop)
+  public constructor(value: number) {
+    super(value)
+    this.valid(value)
+    return new UserStatus(value)
   }
 
   get(): number {
     return this._value
   }
 
-  static valid(prop: number) {
-    if (!Object.keys(USER_STATUS).includes(String(prop))) throw new Error(`invalid userStatus ${prop}`)
+  protected valid(value: number) {
+    if (!Object.keys(USER_STATUS).includes(String(value))) throw new Error(`invalid userStatus ${value}`)
   }
 }

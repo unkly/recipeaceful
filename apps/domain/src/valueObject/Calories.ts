@@ -4,17 +4,18 @@ import { PrimitiveValueObject } from '../seed'
  * カロリー
  */
 export class Calories extends PrimitiveValueObject<number> {
-  static create(prop: number) {
-    this.valid(prop)
-    return new Calories(prop)
+  public constructor(value: number) {
+    super(value)
+    this.valid(value)
+    return new Calories(value)
   }
 
   get(): number {
     return this._value
   }
 
-  static valid(prop: number) {
+  protected valid(value: number) {
     // マイナスは無効
-    if (prop < 0) throw new Error(`invalid calories: ${prop}`)
+    if (value < 0) throw new Error(`invalid calories: ${value}`)
   }
 }

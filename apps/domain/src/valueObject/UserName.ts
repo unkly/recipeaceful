@@ -4,17 +4,18 @@ import { PrimitiveValueObject } from '../seed'
  * ユーザー名
  */
 export class UserName extends PrimitiveValueObject<string> {
-  static create(prop: string) {
-    this.valid(prop)
-    return new UserName(prop)
+  public constructor(value: string) {
+    super(value)
+    this.valid(value)
+    return new UserName(value)
   }
 
   get(): string {
     return this._value
   }
 
-  static valid(prop: string) {
+  protected valid(value: string) {
     // ユーザー名は20文字まで
-    if (prop.length > 20) throw new Error(`invalid username: ${prop}`)
+    if (value.length > 20) throw new Error(`invalid username: ${value}`)
   }
 }

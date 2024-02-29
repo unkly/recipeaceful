@@ -28,18 +28,18 @@ export class RegisterUserUseCase {
 
     // メール通知履歴登録
     const content = await this._emailQueryService.findContentFromActionDivision(
-      ActionDivision.create(ACTION_DIVISION_KEY.EMAIL_VARIFY)
+      new ActionDivision(ACTION_DIVISION_KEY.EMAIL_VARIFY)
     )
 
     const email = Email.create({
-      notificationId: Ulid.create(ulid()),
+      notificationId: new Ulid(ulid()),
       template: EmailTemplate.create({
-        templateId: Ulid.create(ulid()),
-        actionDivision: ActionDivision.create(ACTION_DIVISION_KEY.EMAIL_VARIFY),
+        templateId: new Ulid(ulid()),
+        actionDivision: new ActionDivision(ACTION_DIVISION_KEY.EMAIL_VARIFY),
         content
       }),
-      status: NotificationStatus.create(NOTIFICATION_STATUS_KEY.PENDING),
-      email: MailAddress.create(user.email.get())
+      status: new NotificationStatus(NOTIFICATION_STATUS_KEY.PENDING),
+      email: new MailAddress(user.email.get())
     })
 
     await this._registerEmailNotificationRepository.execute(email)
@@ -49,11 +49,11 @@ export class RegisterUserUseCase {
       await this._sendVerificationEmailRepository.execute(email)
 
       // 成功ステータスに変更し更新
-      email.updateStatus(NotificationStatus.create(NOTIFICATION_STATUS_KEY.SUCCEEDED))
+      email.updateStatus(new NotificationStatus(NOTIFICATION_STATUS_KEY.SUCCEEDED))
       await this._updateEmailNotificationRepository.execute(email)
     } catch (error) {
       // 失敗ステータスに変更し更新
-      email.updateStatus(NotificationStatus.create(NOTIFICATION_STATUS_KEY.FAILED))
+      email.updateStatus(new NotificationStatus(NOTIFICATION_STATUS_KEY.FAILED))
       await this._updateEmailNotificationRepository.execute(email)
 
       console.error(error)

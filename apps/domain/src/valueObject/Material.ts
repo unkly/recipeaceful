@@ -4,17 +4,18 @@ import { PrimitiveValueObject } from '../seed'
  * 材料
  */
 export class Material extends PrimitiveValueObject<string> {
-  static create(prop: string) {
-    this.valid(prop)
-    return new Material(prop)
+  public constructor(value: string) {
+    super(value)
+    this.valid(value)
+    return new Material(value)
   }
 
   get(): string {
     return this._value
   }
 
-  static valid(prop: string) {
+  protected valid(value: string) {
     // 30文字まで
-    if (prop.length > 30) throw new Error(`invalid material: ${prop}`)
+    if (value.length > 30) throw new Error(`invalid material: ${value}`)
   }
 }

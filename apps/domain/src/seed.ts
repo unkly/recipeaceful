@@ -21,9 +21,13 @@ export class Entity {
 export abstract class PrimitiveValueObject<T> {
   protected readonly _value: T
 
-  protected constructor(value: T) {
+  public constructor(value: T) {
+    this.valid(value)
     this._value = value
   }
 
   abstract get(): T
+
+  // eslint-disable-next-line no-unused-vars
+  protected abstract valid(value: T): void
 }
