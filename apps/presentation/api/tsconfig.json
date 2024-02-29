@@ -5,7 +5,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["src/**/*.ts", "test/**/*.ts"],
   "exclude": [
     "node_modules",
     "src/typescript-typedefs.js",
