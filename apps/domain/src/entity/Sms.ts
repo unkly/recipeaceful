@@ -1,7 +1,7 @@
 import { Entity } from 'seed'
-import { ActionDivision } from 'value_object/ActionDivision'
-import { NotificationStatus } from 'value_object/NotificationStatus'
-import { Ulid } from 'value_object/Ulid'
+import { ActionDivision } from 'valueObject/ActionDivision'
+import { NotificationStatus } from 'valueObject/NotificationStatus'
+import { Ulid } from 'valueObject/Ulid'
 
 type Props = {
   notificationId: Ulid

@@ -1,14 +1,14 @@
 import { ArrayUtil } from '@recipeaceful/library/dist/utils/array'
 import { Entity } from '../seed'
-import { Calories } from '../value_object/Calories'
-import { Difficulty } from '../value_object/Difficulty'
-import { Material } from '../value_object/Material'
-import { PostDetail } from '../value_object/PostDetail'
-import { PostTitle } from '../value_object/PostTitle'
-import { ProcessDetail } from '../value_object/ProcessDetail'
+import { Calories } from '../valueObject/Calories'
+import { Difficulty } from '../valueObject/Difficulty'
+import { Material } from '../valueObject/Material'
+import { PostDetail } from '../valueObject/PostDetail'
+import { PostTitle } from '../valueObject/PostTitle'
+import { ProcessDetail } from '../valueObject/ProcessDetail'
 import { User } from './User'
 import { USER_STATUS_KEY } from '@recipeaceful/library/dist/const'
-import { Ulid } from 'value_object/Ulid'
+import { Ulid } from 'valueObject/Ulid'
 
 type Props = {
   postId: Ulid

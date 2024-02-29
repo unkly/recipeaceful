@@ -1,8 +1,8 @@
 import { Entity } from 'seed'
-import { NotificationStatus } from 'value_object/NotificationStatus'
+import { NotificationStatus } from 'valueObject/NotificationStatus'
 import { EmailTemplate } from './EmailTemplate'
-import { MailAddress } from 'value_object/MailAddress'
-import { Ulid } from 'value_object/Ulid'
+import { MailAddress } from 'valueObject/MailAddress'
+import { Ulid } from 'valueObject/Ulid'
 
 type Props = {
   notificationId: Ulid

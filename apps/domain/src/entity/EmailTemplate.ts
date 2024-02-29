@@ -1,6 +1,6 @@
 import { Entity } from 'seed'
-import { ActionDivision } from 'value_object/ActionDivision'
-import { Ulid } from 'value_object/Ulid'
+import { ActionDivision } from 'valueObject/ActionDivision'
+import { Ulid } from 'valueObject/Ulid'
 
 type Props = {
   templateId: Ulid

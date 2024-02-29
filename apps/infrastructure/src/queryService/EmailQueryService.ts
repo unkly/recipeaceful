@@ -1,6 +1,6 @@
 import { PrismaClient } from '@repo/database'
 import { IEmailQueryService } from '@recipeaceful/domain/dist/queryService/IEmailQueryService'
-import { ActionDivision } from '@recipeaceful/domain/dist/value_object/ActionDivision'
+import { ActionDivision } from '@recipeaceful/domain/dist/valueObject/ActionDivision'
 
 export class EmailQueryService implements IEmailQueryService {
   async findContentFromActionDivision(actionDivision: ActionDivision): Promise<string> {

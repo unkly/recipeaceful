@@ -1,11 +1,11 @@
-import { UserStatus } from '../value_object/UserStatus'
+import { UserStatus } from '../valueObject/UserStatus'
 import { Entity } from '../seed'
-import { MailAddress } from '../value_object/MailAddress'
-import { UserName } from '../value_object/UserName'
+import { MailAddress } from '../valueObject/MailAddress'
+import { UserName } from '../valueObject/UserName'
 import { ArrayUtil } from '@recipeaceful/library/dist/utils/array'
 import { Post } from './Post'
 import { USER_STATUS_KEY } from '@recipeaceful/library/dist/const'
-import { Ulid } from 'value_object/Ulid'
+import { Ulid } from 'valueObject/Ulid'
 
 type Props = {
   userId: Ulid
