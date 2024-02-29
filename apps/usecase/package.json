@@ -8,14 +8,17 @@
     "lint:fix": "eslint --fix **/*.{ts,d.ts,js,cjs,mjs}"
   },
   "devDependencies": {
-    "@recipeaceful/library": "^1.0.0",
-    "@recipeaceful/domain": "^1.0.0",
+    "@recipeaceful/domain": "workspace:^",
+    "@recipeaceful/library": "workspace:^",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "@types/eslint": "^8.56.1",
-    "@types/node": "^20.10.6",
-    "eslint": "^8.56.0",
+    "@types/eslint": "^8.56.3",
+    "@types/node": "^20.11.20",
+    "eslint": "^8.57.0",
     "tsc-alias": "1.8.8",
     "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "ulid": "^2.3.0"
   }
 }
