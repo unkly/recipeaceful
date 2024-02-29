@@ -21,14 +21,22 @@ module.exports = {
   },
   ignorePatterns: [
     // Ignore dotfiles
-    '.*.js',
+    '**.js',
     'node_modules/',
     'dist/',
-    'tsconfig.json'
+    'tsconfig.json',
+    'jest.config.js',
+    '**.test.ts'
   ],
   overrides: [
     {
       files: ['*.js?(x)', '*.ts?(x)']
+    },
+    {
+      files: ['tests/**/*'],
+      env: {
+        jest: true
+      }
     }
   ],
   rules: {
