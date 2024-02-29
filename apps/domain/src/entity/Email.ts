@@ -1,4 +1,4 @@
-import { Entity } from 'seed'
+import { Entity } from '../seed'
 import { NotificationStatus } from 'valueObject/NotificationStatus'
 import { EmailTemplate } from './EmailTemplate'
 import { MailAddress } from 'valueObject/MailAddress'

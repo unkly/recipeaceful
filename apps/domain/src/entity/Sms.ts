@@ -1,4 +1,4 @@
-import { Entity } from 'seed'
+import { Entity } from '../seed'
 import { ActionDivision } from 'valueObject/ActionDivision'
 import { NotificationStatus } from 'valueObject/NotificationStatus'
 import { Ulid } from 'valueObject/Ulid'
