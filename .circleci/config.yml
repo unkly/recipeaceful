@@ -19,7 +19,7 @@ jobs:
           command: echo 'export PATH=$PNPM_HOME:$PATH' >> $BASH_ENV
       - run:
           name: Install pnpm
-          command: curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
+          command: sudo curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
       - run:
           name: Install Dependencies
           command: sudo pnpm install
