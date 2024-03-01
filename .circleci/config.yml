@@ -14,20 +14,20 @@ jobs:
       - checkout
       - run:
           name: Install pnpm
-          command: npm install -g pnpm
+          command: sudo npm install -g pnpm
       - run:
           name: Install Dependencies
-          command: pnpm install
+          command: sudo pnpm install
       - run:
           name: Install Turborepo
-          command: pnpm install -g turbo
+          command: sudo pnpm install -g turbo
       - run:
           name: Build with Turborepo
-          command: turbo build
+          command: sudo turbo build
       - aws-cli/setup
       - serverless-framework/setup
       - run:
-          command: pnpm --filter api run deploy
+          command: sudo pnpm --filter api run deploy
           name: deploy
 
 workflows:
