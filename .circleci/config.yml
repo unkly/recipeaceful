@@ -7,7 +7,7 @@ orbs:
 jobs:
   build_and_deploy:
     docker:
-      - image: cimg/node:20.11.1
+      - image: cimg/node:20.11.0
     environment:
       AWS_DEFAULT_REGION: ap-northeast-1
       TURBO_TOKEN: $TURBO_TOKEN
