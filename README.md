@@ -10,6 +10,7 @@ orm: Prisma
 database: PostgreSQL  
 packageManager: turborepo pnpm  
 infra: aws
+ci/cd: CircleCI
 ddd
 
 インフラアーキテクチャ
