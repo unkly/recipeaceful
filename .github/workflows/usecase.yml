@@ -13,3 +13,4 @@ jobs:
       - run: pnpm add -w -D turbo
       - run: pnpm build
       - run: pnpm --filter usecase run lint
+      - run: pnpm --filter usecase run test

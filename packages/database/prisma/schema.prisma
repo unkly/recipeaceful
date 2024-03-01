@@ -5,13 +5,15 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-1.0.x"]
 }
 
 model User {
-  userId String @id @default(uuid()) @db.Uuid
+  userId String @id
   email String @unique
   name String
   icon String?
+  status Int
   createdAt DateTime @default(now())
   createdBy String
   updatedAt DateTime?
@@ -21,7 +23,7 @@ model User {
 }
 
 model Follower {
-  userId String @id @default(uuid()) @db.Uuid
+  userId String @id
   user User @relation(fields: [userId], references: [userId])
   createdAt DateTime @default(now())
   createdBy String
@@ -30,7 +32,7 @@ model Follower {
 }
 
 model Post {
-  postId String @id @default(uuid()) @db.Uuid
+  postId String @id
   title String
   detail String
   calorie Int
@@ -45,10 +47,10 @@ model Post {
 }
 
 model Post_Material {
-  postMaterialId String @id @default(uuid()) @db.Uuid
-  postId String @db.Uuid
+  postMaterialId String @id
+  postId String
   post Post @relation(fields: [postId], references: [postId])
-  materialId String @db.Uuid
+  materialId String
   quantity Int
   createdAt DateTime @default(now())
   createdBy String
@@ -57,7 +59,7 @@ model Post_Material {
 }
 
 model Material {
-  materialId String @id @default(uuid()) @db.Uuid
+  materialId String @id
   name String
   createdAt DateTime @default(now())
   createdBy String
@@ -66,10 +68,10 @@ model Material {
 }
 
 model Process {
-  uuid String @id @default(uuid()) @db.Uuid
+  uuid String @id
   text String
   image String?
-  postId String @db.Uuid
+  postId String
   post Post @relation(fields: [postId], references: [postId])
   createdAt DateTime @default(now())
   createdBy String
@@ -78,11 +80,56 @@ model Process {
 }
 
 model Post_Like {
-  postLikeId String @id @default(uuid()) @db.Uuid
-  userId String @db.Uuid
+  postLikeId String @id
+  userId String
   user User @relation(fields: [userId], references: [userId])
-  postId String @db.Uuid
+  postId String
   post Post @relation(fields: [postId], references: [postId])
+  createdAt DateTime @default(now())
+  createdBy String
+  updatedAt DateTime?
+  updatedBy String?
+}
+
+model Mail_Template {
+  mailTemplateId String @id
+  actionDivision Int
+  content String
+  createdAt DateTime @default(now())
+  createdBy String
+  updatedAt DateTime?
+  updatedBy String?
+}
+
+model Sms_Template {
+  smsTemplateId String @id
+  actionDivision Int
+  content String
+  createdAt DateTime @default(now())
+  updatedAt DateTime?
+  updatedBy String?
+}
+
+model Mail_Notification {
+  mailNotificationId String @id
+  mailTemplateId String
+  actionDivision Int
+  content String
+  status Int
+  email String
+  createdAt DateTime @default(now())
+  createdBy String
+  updatedAt DateTime?
+  updatedBy String?
+}
+
+model Sms_Notification {
+  smsNotificationId String @id
+  smsTemplateId String
+  actionDivision Int
+  content String
+  status Int
+  tel String
   createdAt DateTime @default(now())
   createdBy String
   updatedAt DateTime?
