@@ -1,0 +1,20 @@
+{
+  "name": "@recipeaceful/batch",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "ts-node src/2024/02/createMailTemplateForRegisterUser.ts"
+  },
+  "devDependencies": {
+    "@recipeaceful/library": "workspace:^",
+    "@repo/database": "workspace:*",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/eslint": "^8.56.3",
+    "eslint": "^8.57.0",
+    "tsc-alias": "1.8.8",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "ulid": "^2.3.0"
+  }
+}

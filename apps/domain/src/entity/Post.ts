@@ -1,16 +1,16 @@
-import { ArrayUtil } from '@recipeaceful/library/dist/utils/array'
 import { Entity } from '../seed'
-import { Calories } from '../value_object/Calories'
-import { Difficulty } from '../value_object/Difficulty'
-import { Material } from '../value_object/Material'
-import { PostDetail } from '../value_object/PostDetail'
-import { PostTitle } from '../value_object/PostTitle'
-import { ProcessDetail } from '../value_object/ProcessDetail'
-import { Uuid } from '../value_object/Uuid'
-import { User } from './User'
+import { Calories } from '../valueObject/Calories'
+import { Difficulty } from '../valueObject/Difficulty'
+import { Material } from '../valueObject/Material'
+import { PostDetail } from '../valueObject/PostDetail'
+import { PostTitle } from '../valueObject/PostTitle'
+import { ProcessDetail } from '../valueObject/ProcessDetail'
+import { USER_STATUS_KEY } from '@recipeaceful/library/dist/const'
+import { PostId, UserId } from '../valueObject/Ulid'
+import { UserStatus } from '../valueObject/UserStatus'
 
 type Props = {
-  postId: Uuid
+  postId: PostId
   title: PostTitle
   detail: PostDetail
   calories: Calories
@@ -23,15 +23,16 @@ type Props = {
     detail: ProcessDetail
     image: string | null
   }[]
-  user: User
-  likes: User[] | null
+  userId: UserId
+  userStatus: UserStatus
+  likes: UserId[] | null
 }
 
 /**
  * 投稿
  */
 export class Post extends Entity {
-  private constructor(readonly _props: Props) {
+  private constructor(private readonly _props: Props) {
     super()
   }
 
@@ -49,13 +50,17 @@ export class Post extends Entity {
 
     if (props.likes?.length) {
       // 自分の投稿にはいいね出来ない
-      if (props.likes.find((like) => like.userId.get() === props.user.userId.get()))
-        throw new Error(`自分の投稿にいいねは出来ません userId: ${props.user.userId.get()}`)
+      if (props.likes.find((like) => like.get() === props.userId.get()))
+        throw new Error(`自分の投稿にいいねは出来ません userId: ${props.userId.get()}`)
 
       // likesにuserIdが同じユーザーは二人以上存在しない
-      if (props.likes.length !== ArrayUtil.objectUnique(props.likes, 'userId').length)
-        throw new Error(`同一ユーザーに２回以上いいねされています userId: ${props.user.userId.get()}
+      if (props.likes.length !== new Set(props.likes).size)
+        throw new Error(`同一ユーザーに２回以上いいねされています userId: ${props.userId.get()}
       `)
+    }
+
+    if (props.userStatus.get() !== USER_STATUS_KEY.ACTIVE) {
+      throw new Error(`登録済みのユーザー以外は投稿はできません`)
     }
   }
 
@@ -87,8 +92,12 @@ export class Post extends Entity {
     return this._props.processes
   }
 
-  get user() {
-    return this._props.user
+  get userId() {
+    return this._props.userId
+  }
+
+  get userStatus() {
+    return this._props.userStatus
   }
 
   get likes() {

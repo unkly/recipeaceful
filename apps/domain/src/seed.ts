@@ -1,18 +1,17 @@
-import { Uuid } from './value_object/Uuid'
-import { v4 } from 'uuid'
+import { ulid } from 'ulid'
 
 /**
  * Entityの基底クラス
  */
 export class Entity {
-  private readonly _uuid: Uuid
+  private readonly _ulid: string
 
   constructor() {
-    this._uuid = Uuid.create(v4())
+    this._ulid = ulid()
   }
 
-  public get uuid() {
-    return this._uuid
+  public get ulid() {
+    return this._ulid
   }
 }
 
@@ -22,9 +21,13 @@ export class Entity {
 export abstract class PrimitiveValueObject<T> {
   protected readonly _value: T
 
-  protected constructor(value: T) {
+  public constructor(value: T) {
+    this.valid(value)
     this._value = value
   }
 
   abstract get(): T
+
+  // eslint-disable-next-line no-unused-vars
+  protected abstract valid(value: T): void
 }

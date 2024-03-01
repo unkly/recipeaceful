@@ -6,8 +6,14 @@
 				名前 : userName
 				メールアドレス : mailAddress
 				アイコン : userIcon
+				ステータス: userStatus
 			}
 			object フォロワー {
+				ユーザーID : userId
+				名前 : userName
+				アイコン : userIcon
+			}
+			object フォロー {
 				ユーザーID : userId
 				名前 : userName
 				アイコン : userIcon
@@ -34,7 +40,28 @@
 				量 : count
 			}
 		}
+
+		package 通知集約 {
+			object SMS {
+				送信ID
+				通知区分
+				コンテンツ
+				ステータス
+			}
+
+			object メール {
+				送信ID
+				通知区分
+				コンテンツ
+				ステータス
+			}
+		}
 	}
+	
+	note left of 通知集約
+		* 通知区分は現状ユーザー登録のみ
+		* ステータスは「送信中(pending)・送信済み(succeeded)・送信失敗(failed)」
+	end note
 
 	note left of いいね
 		* １投稿にユーザーIDが同様のいいねは二つ以上存在しない
@@ -57,6 +84,8 @@
 		* 名前は20文字以内
 		* アイコンはなくても良い
 		* メールアドレスは重複不可
+		* ステータスは「pending・active・revoked」の３つ
+		* ステータスがactiveじゃない間はフォロー・投稿・いいねは0
 	end note
 
 	note bottom of プロセス
@@ -69,6 +98,7 @@
 	end note
 
 	ユーザー "1" --> "0..n" フォロワー
+	ユーザー "1" --> "0..n" フォロー
 	ユーザー "1" --> "0..n" 投稿
 	投稿 "1" --> "0..n" いいね
 	投稿 "1" --> "1..n" 材料
