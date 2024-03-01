@@ -27,6 +27,9 @@ commands:
       - run:
           name: Build with Turborepo
           command: pnpm turbo build
+      - run:
+          name: Generate
+          command: pnpm --filter database run generate
       - aws-cli/setup
       - serverless-framework/setup
 
@@ -46,9 +49,6 @@ jobs:
       PNPM_HOME: /home/circleci/.pnpm-store
     steps:
       - setup_environment
-      - run:
-          name: Generate
-          command: pnpm --filter << parameters.filter >> run generate
       - << parameters.additional_steps >>
 
 workflows:
