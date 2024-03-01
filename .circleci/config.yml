@@ -25,11 +25,11 @@ commands:
           paths:
             - ~/.pnpm-store
       - run:
-          name: Build with Turborepo
-          command: pnpm turbo build
-      - run:
           name: Generate
           command: pnpm --filter database run generate
+      - run:
+          name: Build with Turborepo
+          command: pnpm turbo build
       - aws-cli/setup
       - serverless-framework/setup
 
