@@ -12,7 +12,8 @@ ddd
 
 インフラアーキテクチャ
 
-![architecture](https://github.com/unkly/recipeaceful/assets/105118423/46f0226e-67a7-42a8-bb2d-7dd26543f9cc)
+![architecture](https://github.com/unkly/recipeaceful/assets/105118423/705a4fbb-1b52-4eff-94c1-f6445256f24c)
+
 
 ## セットアップ
 1. `git clone https://github.com/unkly/recipeaceful.git`
