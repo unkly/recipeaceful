@@ -73,6 +73,9 @@ jobs:
           name: generate
           command: pnpm --filter database run generate
       - run:
+          name: lint
+          command: pnpm --filter domain run lint
+      - run:
           name: test
           command: pnpm --filter domain run test
   usecase_test:
@@ -108,8 +111,11 @@ jobs:
           name: generate
           command: pnpm --filter database run generate
       - run:
+          name: lint
+          command: pnpm --filter usecase run lint
+      - run:
           name: test
-          command: pnpm --filter domain run test
+          command: pnpm --filter usecase run test
   api_test:
     docker:
       - image: cimg/node:20.11.0
@@ -143,8 +149,11 @@ jobs:
           name: generate
           command: pnpm --filter database run generate
       - run:
+          name: lint
+          command: pnpm --filter api run lint
+      - run:
           name: test
-          command: pnpm --filter domain run test
+          command: pnpm --filter api run test
 
 workflows:
   deploy:
