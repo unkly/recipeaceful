@@ -8,7 +8,6 @@ export class Difficulty extends PrimitiveValueObject<number> {
   public constructor(value: number) {
     super(value)
     this.valid(value)
-    return new Difficulty(value)
   }
 
   get(): number {

@@ -33,7 +33,7 @@ type Props = {
  * 投稿
  */
 export class Post extends Entity {
-  private constructor(readonly _props: Props) {
+  private constructor(private readonly _props: Props) {
     super()
   }
 

@@ -8,7 +8,6 @@ export class ActionDivision extends PrimitiveValueObject<number> {
   public constructor(value: number) {
     super(value)
     this.valid(value)
-    return new ActionDivision(value)
   }
 
   get(): number {

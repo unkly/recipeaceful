@@ -8,7 +8,6 @@ export class UserStatus extends PrimitiveValueObject<number> {
   public constructor(value: number) {
     super(value)
     this.valid(value)
-    return new UserStatus(value)
   }
 
   get(): number {
@@ -16,6 +15,6 @@ export class UserStatus extends PrimitiveValueObject<number> {
   }
 
   protected valid(value: number) {
-    if (!Object.keys(USER_STATUS).includes(String(value))) throw new Error(`invalid userStatus ${value}`)
+    if (!Object.keys(USER_STATUS).includes(String(value))) throw new Error(`invalid userStatus: ${value}`)
   }
 }

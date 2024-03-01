@@ -7,7 +7,6 @@ export class PostTitle extends PrimitiveValueObject<string> {
   public constructor(value: string) {
     super(value)
     this.valid(value)
-    return new PostTitle(value)
   }
 
   get(): string {

@@ -1,4 +1,12 @@
-export const DIFFICULTY: Record<number, string> = {
+export const DIFFICULTY_KEY = {
+  VERY_EASY: 1,
+  EASY: 2,
+  NORMAL: 3,
+  HARD: 4,
+  VERY_HARD: 5
+} as const
+
+export const DIFFICULTY: Record<(typeof DIFFICULTY_KEY)[keyof typeof DIFFICULTY_KEY], string> = {
   1: 'めっちゃ簡単',
   2: '簡単',
   3: '普通',

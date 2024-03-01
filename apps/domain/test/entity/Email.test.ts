@@ -8,7 +8,7 @@ import { NotificationStatus } from '../../src/valueObject/NotificationStatus'
 import { MailAddress } from '../../src/valueObject/MailAddress'
 
 describe('Email', () => {
-  it('正常系', () => {
+  it('normal cases', () => {
     const id = new Ulid(ulid())
     const entity = Email.create({
       notificationId: id,

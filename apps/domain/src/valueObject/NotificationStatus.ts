@@ -8,7 +8,6 @@ export class NotificationStatus extends PrimitiveValueObject<number> {
   public constructor(value: number) {
     super(value)
     this.valid(value)
-    return new NotificationStatus(value)
   }
 
   get(): number {

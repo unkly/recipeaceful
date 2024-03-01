@@ -8,7 +8,6 @@ export class MailAddress extends PrimitiveValueObject<string> {
   public constructor(value: string) {
     super(value)
     this.valid(value)
-    return new MailAddress(value)
   }
 
   get(): string {

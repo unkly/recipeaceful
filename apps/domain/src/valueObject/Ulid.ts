@@ -5,7 +5,6 @@ export class Ulid extends PrimitiveValueObject<string> {
   public constructor(value: string) {
     super(value)
     this.valid(value)
-    return new Ulid(value)
   }
 
   get(): string {

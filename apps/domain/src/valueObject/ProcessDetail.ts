@@ -7,7 +7,6 @@ export class ProcessDetail extends PrimitiveValueObject<string> {
   public constructor(value: string) {
     super(value)
     this.valid(value)
-    return new ProcessDetail(value)
   }
 
   get(): string {

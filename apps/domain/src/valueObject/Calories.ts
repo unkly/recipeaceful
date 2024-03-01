@@ -7,7 +7,6 @@ export class Calories extends PrimitiveValueObject<number> {
   public constructor(value: number) {
     super(value)
     this.valid(value)
-    return new Calories(value)
   }
 
   get(): number {
