@@ -1,0 +1,30 @@
+version: 2.1
+
+orbs:
+  aws-lambda: circleci/aws-lambda@0.1.13
+
+jobs:
+  build_and_deploy:
+    docker:
+      - image: cimg/node:14.17
+    environment:
+      TURBO_TOKEN: $TURBO_TOKEN
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: pnpm install
+      - run:
+          name: Build with Turborepo
+          command: pnpm turbo build
+      - aws-lambda/deploy:
+          function_name: LambdaFunction
+          region: ap-northeast-1
+          aws_access_key_id: $AWS_ACCESS_KEY_ID
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build_and_deploy
