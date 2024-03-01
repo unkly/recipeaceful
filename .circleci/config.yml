@@ -4,8 +4,40 @@ orbs:
   aws-cli: circleci/aws-cli@3.1
   serverless-framework: circleci/serverless-framework@2.0.1
 
+commands:
+  setup_environment:
+    description: 'Setup the environment and install dependencies'
+    steps:
+      - checkout
+      - run:
+          name: Install pnpm
+          command: |
+            export SHELL=/bin/bash
+            curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=8.15.1 sh -
+      - restore_cache:
+          keys:
+            - pnpm-{{ checksum "pnpm-lock.yaml" }}
+      - run:
+          name: Install Dependencies
+          command: pnpm install
+      - save_cache:
+          key: pnpm-{{ checksum "pnpm-lock.yaml" }}
+          paths:
+            - ~/.pnpm-store
+      - run:
+          name: Build with Turborepo
+          command: pnpm turbo build
+      - aws-cli/setup
+      - serverless-framework/setup
+
 jobs:
-  build_and_deploy:
+  generic_job:
+    parameters:
+      filter:
+        type: string
+      additional_steps:
+        type: steps
+        default: []
     docker:
       - image: cimg/node:20.11.0
     environment:
@@ -13,161 +45,53 @@ jobs:
       TURBO_TOKEN: $TURBO_TOKEN
       PNPM_HOME: /home/circleci/.pnpm-store
     steps:
-      - checkout
+      - setup_environment
       - run:
-          name: Install pnpm
-          command: |
-            export SHELL=/bin/bash
-            curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=8.15.1 sh -
-      - run:
-          name: Install Dependencies
-          command: pnpm install
-      - restore_cache:
-          keys:
-            - pnpm-{{ checksum "pnpm-lock.yaml" }}
-      - save_cache:
-          key: pnpm-{{ checksum "pnpm-lock.yaml" }}
-          paths:
-            - ~/.pnpm-store
-      - run:
-          name: Build with Turborepo
-          command: pnpm turbo build
-      - aws-cli/setup
-      - serverless-framework/setup
-      - run:
-          name: generate
-          command: pnpm --filter database run generate
-      - run:
-          name: Deploy
-          command: pnpm --filter api run deploy
-  domain_test:
-    docker:
-      - image: cimg/node:20.11.0
-    environment:
-      AWS_DEFAULT_REGION: ap-northeast-1
-      TURBO_TOKEN: $TURBO_TOKEN
-      PNPM_HOME: /home/circleci/.pnpm-store
-    steps:
-      - checkout
-      - run:
-          name: Install pnpm
-          command: |
-            export SHELL=/bin/bash
-            curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=8.15.1 sh -
-      - run:
-          name: Install Dependencies
-          command: pnpm install
-      - restore_cache:
-          keys:
-            - pnpm-{{ checksum "pnpm-lock.yaml" }}
-      - save_cache:
-          key: pnpm-{{ checksum "pnpm-lock.yaml" }}
-          paths:
-            - ~/.pnpm-store
-      - run:
-          name: Build with Turborepo
-          command: pnpm turbo build
-      - aws-cli/setup
-      - serverless-framework/setup
-      - run:
-          name: generate
-          command: pnpm --filter database run generate
-      - run:
-          name: lint
-          command: pnpm --filter domain run lint
-      - run:
-          name: test
-          command: pnpm --filter domain run test
-  usecase_test:
-    docker:
-      - image: cimg/node:20.11.0
-    environment:
-      AWS_DEFAULT_REGION: ap-northeast-1
-      TURBO_TOKEN: $TURBO_TOKEN
-      PNPM_HOME: /home/circleci/.pnpm-store
-    steps:
-      - checkout
-      - run:
-          name: Install pnpm
-          command: |
-            export SHELL=/bin/bash
-            curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=8.15.1 sh -
-      - run:
-          name: Install Dependencies
-          command: pnpm install
-      - restore_cache:
-          keys:
-            - pnpm-{{ checksum "pnpm-lock.yaml" }}
-      - save_cache:
-          key: pnpm-{{ checksum "pnpm-lock.yaml" }}
-          paths:
-            - ~/.pnpm-store
-      - run:
-          name: Build with Turborepo
-          command: pnpm turbo build
-      - aws-cli/setup
-      - serverless-framework/setup
-      - run:
-          name: generate
-          command: pnpm --filter database run generate
-      - run:
-          name: lint
-          command: pnpm --filter usecase run lint
-      - run:
-          name: test
-          command: pnpm --filter usecase run test
-  api_test:
-    docker:
-      - image: cimg/node:20.11.0
-    environment:
-      AWS_DEFAULT_REGION: ap-northeast-1
-      TURBO_TOKEN: $TURBO_TOKEN
-      PNPM_HOME: /home/circleci/.pnpm-store
-    steps:
-      - checkout
-      - run:
-          name: Install pnpm
-          command: |
-            export SHELL=/bin/bash
-            curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=8.15.1 sh -
-      - run:
-          name: Install Dependencies
-          command: pnpm install
-      - restore_cache:
-          keys:
-            - pnpm-{{ checksum "pnpm-lock.yaml" }}
-      - save_cache:
-          key: pnpm-{{ checksum "pnpm-lock.yaml" }}
-          paths:
-            - ~/.pnpm-store
-      - run:
-          name: Build with Turborepo
-          command: pnpm turbo build
-      - aws-cli/setup
-      - serverless-framework/setup
-      - run:
-          name: generate
-          command: pnpm --filter database run generate
-      - run:
-          name: lint
-          command: pnpm --filter api run lint
-      - run:
-          name: test
-          command: pnpm --filter api run test
+          name: Generate
+          command: pnpm --filter << parameters.filter >> run generate
+      - << parameters.additional_steps >>
 
 workflows:
+  version: 2
   deploy:
     jobs:
-      - build_and_deploy:
+      - generic_job:
+          name: build_and_deploy
+          filter: 'api'
+          additional_steps:
+            - run:
+                name: Deploy
+                command: pnpm --filter api run deploy
           filters:
             branches:
               only: develop
-  api_test:
-    jobs:
-      - api_test
-  domain_test:
-    jobs:
-      - domain_test
-  usecase_test:
-    jobs:
-      - usecase_test
+      - generic_job:
+          name: api_test
+          filter: 'api'
+          additional_steps:
+            - run:
+                name: Lint
+                command: pnpm --filter api run lint
+            - run:
+                name: Test
+                command: pnpm --filter api run test
+      - generic_job:
+          name: domain_test
+          filter: 'domain'
+          additional_steps:
+            - run:
+                name: Lint
+                command: pnpm --filter domain run lint
+            - run:
+                name: Test
+                command: pnpm --filter domain run test
+      - generic_job:
+          name: usecase_test
+          filter: 'usecase'
+          additional_steps:
+            - run:
+                name: Lint
+                command: pnpm --filter usecase run lint
+            - run:
+                name: Test
+                command: pnpm --filter usecase run test
