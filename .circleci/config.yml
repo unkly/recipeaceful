@@ -64,7 +64,7 @@ workflows:
                 command: pnpm --filter api run deploy
           filters:
             branches:
-              only: feature/10/ci-cd
+              only: develop
       - generic_job:
           name: api_test
           filter: 'api'
