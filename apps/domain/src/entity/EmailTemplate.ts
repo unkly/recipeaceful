@@ -1,9 +1,9 @@
 import { Entity } from '../seed'
-import { ActionDivision } from 'valueObject/ActionDivision'
-import { Ulid } from 'valueObject/Ulid'
+import { ActionDivision } from '../valueObject/ActionDivision'
+import { TemplateId } from '../valueObject/Ulid'
 
 type Props = {
-  templateId: Ulid
+  templateId: TemplateId
   actionDivision: ActionDivision
   content: string
 }
@@ -18,7 +18,7 @@ export class EmailTemplate extends Entity {
     return new EmailTemplate(props)
   }
 
-  public static validate(props: Props) {}
+  public static validate(_props: Props) {}
 
   get templateId() {
     return this._props.templateId

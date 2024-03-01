@@ -6,11 +6,11 @@ import { PostDetail } from '../valueObject/PostDetail'
 import { PostTitle } from '../valueObject/PostTitle'
 import { ProcessDetail } from '../valueObject/ProcessDetail'
 import { USER_STATUS_KEY } from '@recipeaceful/library/dist/const'
-import { Ulid } from 'valueObject/Ulid'
-import { UserStatus } from 'valueObject/UserStatus'
+import { PostId, UserId } from '../valueObject/Ulid'
+import { UserStatus } from '../valueObject/UserStatus'
 
 type Props = {
-  postId: Ulid
+  postId: PostId
   title: PostTitle
   detail: PostDetail
   calories: Calories
@@ -23,10 +23,9 @@ type Props = {
     detail: ProcessDetail
     image: string | null
   }[]
-  userId: Ulid
+  userId: UserId
   userStatus: UserStatus
-  // userId
-  likes: Ulid[] | null
+  likes: UserId[] | null
 }
 
 /**

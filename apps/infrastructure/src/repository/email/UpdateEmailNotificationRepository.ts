@@ -5,7 +5,7 @@ import { IUpdateEmailNotificationRepository } from '@recipeaceful/domain/dist/re
 import { ActionDivision } from '@recipeaceful/domain/dist/valueObject/ActionDivision'
 import { MailAddress } from '@recipeaceful/domain/dist/valueObject/MailAddress'
 import { NotificationStatus } from '@recipeaceful/domain/dist/valueObject/NotificationStatus'
-import { Ulid } from '@recipeaceful/domain/dist/valueObject/Ulid'
+import { NotificationId, TemplateId } from '@recipeaceful/domain/dist/valueObject/Ulid'
 import { getCurrentDate } from '@recipeaceful/library/dist/utils/date'
 
 export class UpdateEmailNotificationRepository implements IUpdateEmailNotificationRepository {
@@ -27,9 +27,9 @@ export class UpdateEmailNotificationRepository implements IUpdateEmailNotificati
     })
 
     return Email.create({
-      notificationId:new Ulid(updatedEmail.mailNotificationId),
+      notificationId: new NotificationId(updatedEmail.mailNotificationId),
       template: EmailTemplate.create({
-        templateId: new Ulid(updatedEmail.mailTemplateId),
+        templateId: new TemplateId(updatedEmail.mailTemplateId),
         actionDivision: new ActionDivision(updatedEmail.actionDivision),
         content: updatedEmail.content
       }),

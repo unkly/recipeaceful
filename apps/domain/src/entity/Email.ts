@@ -1,11 +1,11 @@
 import { Entity } from '../seed'
 import { NotificationStatus } from 'valueObject/NotificationStatus'
 import { EmailTemplate } from './EmailTemplate'
-import { MailAddress } from 'valueObject/MailAddress'
-import { Ulid } from 'valueObject/Ulid'
+import { MailAddress } from '../valueObject/MailAddress'
+import { NotificationId } from '../valueObject/Ulid'
 
 type Props = {
-  notificationId: Ulid
+  notificationId: NotificationId
   template: EmailTemplate
   status: NotificationStatus
   email: MailAddress
@@ -21,7 +21,7 @@ export class Email extends Entity {
     return new Email(props)
   }
 
-  public static validate(props: Props) {}
+  public static validate(_props: Props) {}
 
   get template() {
     return this._props.template

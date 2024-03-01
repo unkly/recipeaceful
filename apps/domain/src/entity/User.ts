@@ -3,18 +3,18 @@ import { Entity } from '../seed'
 import { MailAddress } from '../valueObject/MailAddress'
 import { UserName } from '../valueObject/UserName'
 import { USER_STATUS_KEY } from '@recipeaceful/library/dist/const'
-import { Ulid } from 'valueObject/Ulid'
+import { PostId, UserId } from '../valueObject/Ulid'
 
 type Props = {
-  userId: Ulid
+  userId: UserId
   name: UserName
   email: MailAddress
   password: string
   icon: string | null
   status: UserStatus
-  follows: Ulid[] | null
-  followers: Ulid[] | null
-  posts: Ulid[] | null
+  follows: UserId[] | null
+  followers: UserId[] | null
+  posts: PostId[] | null
 }
 
 /**

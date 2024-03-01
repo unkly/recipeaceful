@@ -7,15 +7,16 @@ import { Material } from '../../src/valueObject/Material'
 import { PostDetail } from '../../src/valueObject/PostDetail'
 import { PostTitle } from '../../src/valueObject/PostTitle'
 import { ProcessDetail } from '../../src/valueObject/ProcessDetail'
-import { Ulid } from '../../src/valueObject/Ulid'
+import { PostId, UserId } from '../../src/valueObject/Ulid'
 import { UserStatus } from '../../src/valueObject/UserStatus'
 
 describe('Post', () => {
-  const id = new Ulid(ulid())
+  const postId = new PostId(ulid())
+  const userId = new UserId(ulid())
   describe('normal cases', () => {
     it('If likes is exists', () => {
       const entity = Post.create({
-        postId: id,
+        postId: postId,
         title: new PostTitle('卵焼き'),
         detail: new PostDetail('ちょー簡単な料理です。'),
         calories: new Calories(120),
@@ -40,12 +41,12 @@ describe('Post', () => {
             image: null
           }
         ],
-        userId: id,
+        userId: userId,
         userStatus: new UserStatus(USER_STATUS_KEY.ACTIVE),
-        likes: [new Ulid(ulid()), new Ulid(ulid()), new Ulid(ulid()), new Ulid(ulid())]
+        likes: [new UserId(ulid()), new UserId(ulid()), new UserId(ulid()), new UserId(ulid())]
       })
 
-      expect(entity.postId.get()).toBe(id.get())
+      expect(entity.postId.get()).toBe(postId.get())
       expect(entity.title.get()).toBe('卵焼き')
       expect(entity.detail.get()).toBe('ちょー簡単な料理です。')
       expect(entity.calories.get()).toBe(120)
@@ -58,7 +59,7 @@ describe('Post', () => {
         expect(process.detail.get()).toBe(entity.processes[i]?.detail.get())
         expect(process.image).toBe(entity.processes[i]?.image)
       })
-      expect(entity.userId.get()).toBe(id.get())
+      expect(entity.userId.get()).toBe(userId.get())
       expect(entity.userStatus.get()).toBe(USER_STATUS_KEY.ACTIVE)
       entity.likes?.forEach((like, i) => {
         expect(like.get()).toBe(entity.likes![i]?.get())
@@ -67,7 +68,7 @@ describe('Post', () => {
     })
     it('do not exist', () => {
       const entity = Post.create({
-        postId: id,
+        postId: postId,
         title: new PostTitle('卵焼き'),
         detail: new PostDetail('ちょー簡単な料理です。'),
         calories: new Calories(120),
@@ -84,7 +85,7 @@ describe('Post', () => {
             image: 'material.png'
           }
         ],
-        userId: id,
+        userId: userId,
         userStatus: new UserStatus(USER_STATUS_KEY.ACTIVE),
         likes: null
       })
@@ -97,7 +98,7 @@ describe('Post', () => {
     it('If the processes does not exist', () => {
       expect(() =>
         Post.create({
-          postId: id,
+          postId: postId,
           title: new PostTitle('卵焼き'),
           detail: new PostDetail('ちょー簡単な料理です。'),
           calories: new Calories(120),
@@ -109,16 +110,16 @@ describe('Post', () => {
             }
           ],
           processes: [],
-          userId: id,
+          userId: userId,
           userStatus: new UserStatus(USER_STATUS_KEY.ACTIVE),
           likes: null
         })
-      ).toThrow('プロセスが設定されていません postId: ' + id.get())
+      ).toThrow('プロセスが設定されていません postId: ' + postId.get())
     })
     it('If the materials does not exist', () => {
       expect(() =>
         Post.create({
-          postId: id,
+          postId: postId,
           title: new PostTitle('卵焼き'),
           detail: new PostDetail('ちょー簡単な料理です。'),
           calories: new Calories(120),
@@ -130,16 +131,16 @@ describe('Post', () => {
               image: 'material.png'
             }
           ],
-          userId: id,
+          userId: userId,
           userStatus: new UserStatus(USER_STATUS_KEY.ACTIVE),
           likes: null
         })
-      ).toThrow('材料が指定されていません postId: ' + id.get())
+      ).toThrow('材料が指定されていません postId: ' + postId.get())
     })
     it('If like list include me', () => {
       expect(() =>
         Post.create({
-          postId: id,
+          postId: postId,
           title: new PostTitle('卵焼き'),
           detail: new PostDetail('ちょー簡単な料理です。'),
           calories: new Calories(120),
@@ -156,18 +157,18 @@ describe('Post', () => {
               image: 'material.png'
             }
           ],
-          userId: id,
+          userId: userId,
           userStatus: new UserStatus(USER_STATUS_KEY.ACTIVE),
-          likes: [id]
+          likes: [userId]
         })
-      ).toThrow('自分の投稿にいいねは出来ません userId: ' + id.get())
+      ).toThrow('自分の投稿にいいねは出来ません userId: ' + userId.get())
     })
     it('If the like list contains the same user at twice', () => {
-      const sameId = new Ulid(ulid())
+      const sameId = new UserId(ulid())
 
       expect(() =>
         Post.create({
-          postId: id,
+          postId: postId,
           title: new PostTitle('卵焼き'),
           detail: new PostDetail('ちょー簡単な料理です。'),
           calories: new Calories(120),
@@ -184,16 +185,16 @@ describe('Post', () => {
               image: 'material.png'
             }
           ],
-          userId: id,
+          userId: userId,
           userStatus: new UserStatus(USER_STATUS_KEY.ACTIVE),
-          likes: [sameId, sameId, new Ulid(ulid()), new Ulid(ulid()), new Ulid(ulid())]
+          likes: [sameId, sameId, new UserId(ulid()), new UserId(ulid()), new UserId(ulid())]
         })
-      ).toThrow('同一ユーザーに２回以上いいねされています userId: ' + id.get())
+      ).toThrow('同一ユーザーに２回以上いいねされています userId: ' + userId.get())
     })
     it('If the user who submitted the post is not authenticated', () => {
       expect(() =>
         Post.create({
-          postId: id,
+          postId: postId,
           title: new PostTitle('卵焼き'),
           detail: new PostDetail('ちょー簡単な料理です。'),
           calories: new Calories(120),
@@ -210,7 +211,7 @@ describe('Post', () => {
               image: 'material.png'
             }
           ],
-          userId: id,
+          userId: userId,
           userStatus: new UserStatus(USER_STATUS_KEY.PENDING),
           likes: null
         })

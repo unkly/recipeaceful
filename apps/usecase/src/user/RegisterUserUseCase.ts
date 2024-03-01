@@ -10,7 +10,7 @@ import { NotificationStatus } from '@recipeaceful/domain/dist/valueObject/Notifi
 import { MailAddress } from '@recipeaceful/domain/dist/valueObject/MailAddress'
 import { ISendVerificationEmailRepository } from '@recipeaceful/domain/dist/repository/email/ISendVerificationEmailRepository'
 import { IUpdateEmailNotificationRepository } from '@recipeaceful/domain/dist/repository/email/IUpdateEmailNotificationRepository'
-import { Ulid } from '@recipeaceful/domain/dist/valueObject/Ulid'
+import { NotificationId, TemplateId } from '@recipeaceful/domain/dist/valueObject/Ulid'
 import { ulid } from 'ulid'
 
 export class RegisterUserUseCase {
@@ -32,9 +32,9 @@ export class RegisterUserUseCase {
     )
 
     const email = Email.create({
-      notificationId: new Ulid(ulid()),
+      notificationId: new NotificationId(ulid()),
       template: EmailTemplate.create({
-        templateId: new Ulid(ulid()),
+        templateId: new TemplateId(ulid()),
         actionDivision: new ActionDivision(ACTION_DIVISION_KEY.EMAIL_VARIFY),
         content
       }),

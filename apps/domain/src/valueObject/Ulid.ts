@@ -15,3 +15,8 @@ export class Ulid extends PrimitiveValueObject<string> {
     if (!value.match(Regex.ULID)) throw new Error(`invalid ulid: ${value}`)
   }
 }
+
+export class NotificationId extends Ulid {}
+export class TemplateId extends Ulid {}
+export class PostId extends Ulid {}
+export class UserId extends Ulid {}

@@ -5,7 +5,7 @@ import { ISendVerificationEmailRepository } from '@recipeaceful/domain/dist/repo
 import { IUpdateEmailNotificationRepository } from '@recipeaceful/domain/dist/repository/email/IUpdateEmailNotificationRepository'
 import { IRegisterUserRepository } from '@recipeaceful/domain/dist/repository/user/IRegisterUserRepository'
 import { MailAddress } from '@recipeaceful/domain/dist/valueObject/MailAddress'
-import { Ulid } from '@recipeaceful/domain/dist/valueObject/Ulid'
+import { UserId } from '@recipeaceful/domain/dist/valueObject/Ulid'
 import { UserName } from '@recipeaceful/domain/dist/valueObject/UserName'
 import { UserStatus } from '@recipeaceful/domain/dist/valueObject/UserStatus'
 import { USER_STATUS_KEY } from '@recipeaceful/library/dist/const'
@@ -39,7 +39,7 @@ describe('RegisterUserUseCase', () => {
     it('should be successed to send email', async () => {
       await usecase.register(
         User.create({
-          userId: new Ulid(ulid()),
+          userId: new UserId(ulid()),
           name: new UserName('テスト 太郎'),
           email: new MailAddress('test@example.com'),
           password: '123456789',
@@ -87,7 +87,7 @@ describe('RegisterUserUseCase', () => {
       expect(() =>
         usecase.register(
           User.create({
-            userId: new Ulid(ulid()),
+            userId: new UserId(ulid()),
             name: new UserName('テスト 太郎'),
             email: new MailAddress('test@example.com'),
             password: '123456789',

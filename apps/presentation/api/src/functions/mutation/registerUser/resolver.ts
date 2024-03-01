@@ -1,4 +1,4 @@
-import { Mutation, MutationRegisterUserArgs, ReturnResultPayload } from '../../../generated/graphql'
+import { Mutation, MutationRegisterUserArgs } from '../../../generated/graphql'
 import { RegisterUserDto } from './dto'
 import { RegisterUserUseCase } from '@recipeaceful/usecase/dist/RegisterUserUseCase'
 import { RegisterUserRepository } from '@recipeaceful/infrastructure/dist/repository/user/RegisterUserRepository'
@@ -14,10 +14,10 @@ import { UserName } from '@recipeaceful/domain/dist/valueObject/UserName'
 import { MailAddress } from '@recipeaceful/domain/dist/valueObject/MailAddress'
 import { UserStatus } from '@recipeaceful/domain/dist/valueObject/UserStatus'
 import { validate } from 'class-validator'
-import { Ulid } from '@recipeaceful/domain/dist/valueObject/Ulid'
 import { ulid } from 'ulid'
 import { AppSyncResolverEvent, Callback, Context } from 'aws-lambda'
 import { CallbackError, ValidateError } from '../../../error'
+import { UserId } from '@recipeaceful/domain/dist/valueObject/Ulid'
 
 export const registerUser = async (
   event: AppSyncResolverEvent<MutationRegisterUserArgs, unknown>,
@@ -44,7 +44,7 @@ export const registerUser = async (
   try {
     await useCase.register(
       User.create({
-        userId: new Ulid(ulid()),
+        userId: new UserId(ulid()),
         name: new UserName(dto.name),
         email: new MailAddress(dto.email),
         password: dto.password,

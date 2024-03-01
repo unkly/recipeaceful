@@ -1,10 +1,10 @@
 import { Entity } from '../seed'
-import { ActionDivision } from 'valueObject/ActionDivision'
-import { NotificationStatus } from 'valueObject/NotificationStatus'
-import { Ulid } from 'valueObject/Ulid'
+import { ActionDivision } from '../valueObject/ActionDivision'
+import { NotificationStatus } from '../valueObject/NotificationStatus'
+import { NotificationId } from '../valueObject/Ulid'
 
 type Props = {
-  notificationId: Ulid
+  notificationId: NotificationId
   actionDivision: ActionDivision
   content: string
   status: NotificationStatus
@@ -20,7 +20,7 @@ export class Sms extends Entity {
     return new Sms(props)
   }
 
-  public static validate(props: Props) {}
+  public static validate(_props: Props) {}
 
   get notificationId() {
     return this._props.notificationId
