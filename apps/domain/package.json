@@ -6,7 +6,7 @@
     "lint": "eslint .",
     "watch": "tsc -w",
     "lint:fix": "eslint --fix **/*.{ts,d.ts,js,cjs,mjs}",
-    "test": "jest"
+    "test": "jest --silent"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",

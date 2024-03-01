@@ -5,7 +5,8 @@
     "lint": "eslint . --max-warnings 0",
     "watch": "tsc -w",
     "build": "npx tsc -p tsconfig.build.json && npx tsc-alias -p tsconfig.build.json",
-    "lint:fix": "eslint --fix **/*.{ts,d.ts,js,cjs,mjs}"
+    "lint:fix": "eslint --fix **/*.{ts,d.ts,js,cjs,mjs}",
+    "test": "jest --silent"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",

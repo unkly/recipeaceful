@@ -9,7 +9,8 @@
     "codegen": "graphql-codegen --config codegen.ts",
     "lint:fix": "eslint --fix **/*.{ts,d.ts,js,cjs,mjs}",
     "deploy": "sls deploy --stage dev",
-    "remove": "sls remove --stage dev"
+    "remove": "sls remove --stage dev",
+    "test": "jest --silent"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",
