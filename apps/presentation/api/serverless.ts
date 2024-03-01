@@ -1,4 +1,5 @@
 import type { AWS } from '@serverless/typescript'
+import * as path from 'path'
 
 const serverlessConfiguration: AWS = {
   service: 'test',
@@ -52,7 +53,10 @@ const serverlessConfiguration: AWS = {
       concurrency: 10
     },
     defaultStage: 'dev',
-    accountId: {},
+    accountId: {
+      dev: 845415451667,
+      st: 845415451667
+    },
     'appsync-simulator': {
       location: '.esbuild/.build',
       watch: false,
@@ -62,7 +66,7 @@ const serverlessConfiguration: AWS = {
     appSync: {
       name: '${opt:stage, self:custom.defaultStage}-api',
       authenticationType: 'API_KEY',
-      schema: 'src/schema/schema.graphql',
+      schema: path.join(__dirname, 'schema', 'schema.graphql'),
       apiKeys: [
         {
           name: 'test appsync',

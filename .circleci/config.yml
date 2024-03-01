@@ -35,6 +35,9 @@ jobs:
       - aws-cli/setup
       - serverless-framework/setup
       - run:
+          name: generate
+          command: pnpm --filter database run generate
+      - run:
           name: Deploy
           command: pnpm --filter api run deploy
 
