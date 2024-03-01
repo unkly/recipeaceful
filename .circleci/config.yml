@@ -10,6 +10,8 @@ jobs:
     executor: serverless-framework/default
     environment:
       AWS_DEFAULT_REGION: ap-northeast-1
+      TURBO_TOKEN: $TURBO_TOKEN
+      PNPM_HOME: /home/circleci/.local/share/pnpm
     steps:
       - checkout
       - run:
