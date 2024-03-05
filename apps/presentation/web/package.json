@@ -3,27 +3,43 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "npx next dev",
+    "dev:mock": "npx cross-env USE_MOCK=true next dev",
+    "build": "npx next build",
+    "start": "npx next start",
     "lint": "eslint . --max-warnings 0",
-    "lint:fix": "eslint --fix **/*.{ts,d.ts,js,cjs,mjs}"
+    "lint:fix": "eslint --fix **/*.{ts,d.ts,js,cjs,mjs}",
+    "codegen": "graphql-codegen --config src/graphql/codegen.ts"
   },
   "dependencies": {
-    "@repo/ui": "workspace:*",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
+    "@hookform/resolvers": "^3.3.4",
+    "@mui/material": "^5.15.11",
+    "@tanstack/react-query": "^5.24.6",
+    "graphql": "^16.8.1",
+    "graphql-request": "^6.1.0",
     "next": "^14.1.0",
+    "next-auth": "^4.24.6",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.50.1",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "5.0.0",
+    "@graphql-codegen/client-preset": "^4.1.0",
+    "@graphql-codegen/typescript-msw": "^2.1.0",
+    "@graphql-typed-document-node/core": "^3.2.0",
     "@next/eslint-plugin-next": "^14.1.0",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/eslint": "^8.56.3",
     "@types/node": "^20.11.20",
-    "@types/react": "^18.2.59",
+    "@types/react": "^18.2.60",
     "@types/react-dom": "^18.2.19",
     "eslint": "^8.57.0",
-    "typescript": "^5.3.3"
+    "msw": "^1.3.2",
+    "typescript": "^5.2.2"
   }
 }
