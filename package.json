@@ -2,9 +2,6 @@
   "name": "recipeaceful",
   "version": "1.0.0",
   "private": true,
-  "directories": {
-    "doc": "docs"
-  },
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
