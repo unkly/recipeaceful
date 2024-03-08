@@ -1,21 +1,19 @@
 'use client'
 import { Button, Checkbox, FormControlLabel, TextField } from '@mui/material'
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
 import { Controller, useForm } from 'react-hook-form'
 import { LoginFormSchema, loginSchema } from './schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { css } from '@emotion/react'
 import { theme } from '../../../constants/theme'
 import Link from 'next/link'
+import { LoginProvider } from "@/components/shared/LoginProvider"
 
 export const LoginPage = () => {
-  const session = useSession()
-  const router = useRouter()
-
-  if (session.status === 'authenticated') void router.push('/timeline')
-
-  return <Login />
+  return (
+    <LoginProvider>
+      <Login /> 
+    </LoginProvider>
+  )
 }
 
 const useLogin = () => {
